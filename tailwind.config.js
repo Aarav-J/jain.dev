@@ -15,7 +15,7 @@ export default {
       },
       backgroundImage: {
         navbarTitle:
-          "conic-gradient(from -65deg at 103.52% 77.36%, #C517F0 2.499373219907284deg, #9117DD 35.832394659519196deg, #C417F0 312.0280694961548deg, #8317D8 357.8975987434387deg)",
+          "conic-gradient(from 296deg at 103.52% 77.36%, #C517F0 126deg, #9117DD 334deg, #C417F0 350deg, #8317D8 326deg);",
       },
     },
     fontFamily: {
