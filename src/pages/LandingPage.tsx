@@ -1,6 +1,6 @@
 const LandingPage = () => { 
     return (
-        <div className="w-screen h-screen bg-background-primary flex  items-center justify-center ">
+        <div className="section w-screen h-screen bg-background-primary flex  items-center justify-center ">
             <div className="heading inline-flex lg:items-start items-center flex-col">
                 <span className="font-semibold text-devPink text-3xl ">Who Am I?</span>
                 <span className="text-white font-black text-7xl">I'm Aarav Jain</span>

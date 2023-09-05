@@ -1,6 +1,6 @@
 const AboutPage = () => { 
     return (
-        <div className="w-screen h-screen bg-background-primary flex  items-center justify-center ">
+        <div className="section w-screen h-screen bg-background-primary flex  items-center justify-center ">
             <div className="heading inline-flex items-center flex-col gap-4">
                 <span className="font-semibold text-devPink text-3xl ">About</span>
                 <span className="text-white font-black text-7xl">Student</span>
