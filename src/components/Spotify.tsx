@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import getNowPlayingItem from '../spotify'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-type Result = { 
+type Result = {
     title: string | undefined
     artist: string | undefined
     albumImageUrl: string | undefined
@@ -10,10 +10,8 @@ type Result = {
 
 }
 const Spotify = () => {
-    const client_id = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
-    const client_secret = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET;
     const refresh_token = import.meta.env.VITE_SPOTIFY_REFRESH_TOKEN;
-    
+
     const [loading, setLoading] = useState(true)
     const [result, setResult] = useState<Result>({
         title: undefined,
@@ -22,10 +20,10 @@ const Spotify = () => {
         songUrl: undefined,
 
     })
-    useEffect(() => { 
+    useEffect(() => {
         Promise.all([
-            getNowPlayingItem(client_id, client_secret, refresh_token), 
-        ]).then((results) => { 
+            getNowPlayingItem(refresh_token),
+        ]).then((results) => {
             if (results[0] !== false) {
                 setResult(results[0])
                 setLoading(false)
@@ -43,7 +41,7 @@ const Spotify = () => {
                 </div>
                 <a href="https://open.spotify.com/user/paei6pn8u6ac9w2d42wkaohup?si=0bca6f6a59c24e52" target="_blank">
                     <FontAwesomeIcon icon={faSpotify} className='m-auto mr-2 ml-4 w-12 h-12 text-devPurple' />
-                    </a>
+                </a>
             </div>
         </div>
     )

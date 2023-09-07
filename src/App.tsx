@@ -3,21 +3,22 @@ import AboutPage from './pages/AboutPage.tsx'
 import SkillsPage from './pages/SkilsPage.tsx'
 import Navbar from './components/Navbar.tsx'
 import "./index.scss"
+import { useMediaQuery } from 'usehooks-ts'
 import Pagination from './components/pagination/Pagination.tsx'
 import "./section.scss"
-import {useState, useRef, useEffect} from "react"
+import { useState, useRef, useEffect } from "react"
 import useOnScreen from "./hooks/useOnScreem.ts"
 import ProjectsPage from './pages/ProjectsPage.tsx'
-function App() { 
-       
-  const scrollTo = (section: React.RefObject<HTMLDivElement>) => { 
-        section.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-  const sectionLanding = useRef<HTMLDivElement>(null); 
+function App() {
+  const isScrollLocking = useMediaQuery('(min-width: 1024px)')
+  const scrollTo = (section: React.RefObject<HTMLDivElement>) => {
+    section.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+  const sectionLanding = useRef<HTMLDivElement>(null);
   const headingRefLanding = useRef<HTMLHeadingElement>(null);
-  const sectionAbout = useRef<HTMLDivElement>(null); 
+  const sectionAbout = useRef<HTMLDivElement>(null);
   const headingRefAbout = useRef<HTMLHeadingElement>(null);
-  const sectionSkills = useRef<HTMLDivElement>(null); 
+  const sectionSkills = useRef<HTMLDivElement>(null);
   const headingRefSkills = useRef<HTMLHeadingElement>(null);
   const sectionProject = useRef<HTMLDivElement>(null);
   const headingRefProject = useRef<HTMLHeadingElement>(null);
@@ -26,52 +27,52 @@ function App() {
   const section3IsVisible = useOnScreen(headingRefSkills)
   const section4IsVisible = useOnScreen(headingRefProject)
   const [activeNumber, setActiveNumber] = useState<number>(0)
-  useEffect((() => { 
-    if (section1IsVisible) { 
+  useEffect((() => {
+    if (section1IsVisible) {
       setActiveNumber(1)
-      console.log("Landing Page")
-      
+
     }
-    if (section2IsVisible) { 
+    if (section2IsVisible) {
       setActiveNumber(2)
-      console.log("About Page")
-      
+
+
     }
-    if (section3IsVisible) { 
+    if (section3IsVisible) {
       setActiveNumber(3)
-      console.log("Skills Page")
-      
+
+
     }
 
-      if (section4IsVisible) { 
+    if (section4IsVisible) {
       setActiveNumber(4)
-      console.log("Projects Page")
-      
+
+
     }
   }), [section1IsVisible, section2IsVisible, section3IsVisible, section4IsVisible])
   return (
-    <div className='body'> 
+    <div className='body'>
       <div>
         <Navbar />
-        </div>
-      <div  className="container">
+
+      </div>
+      <div className="container">
         <div className='landingPage' ref={sectionLanding}>
-          <LandingPage scroll={scrollTo} learnMoreRef={sectionAbout}headingRef={headingRefLanding}/>
+          <LandingPage scroll={scrollTo} learnMoreRef={sectionAbout} headingRef={headingRefLanding} />
         </div>
         <div className='aboutPage' ref={sectionAbout}>
-          <AboutPage headingRef={headingRefAbout}/>
+          <AboutPage headingRef={headingRefAbout} />
         </div>
         <div className='skillPage' ref={sectionSkills}>
-          <SkillsPage headingRef={headingRefSkills}/>
+          <SkillsPage headingRef={headingRefSkills} />
         </div>
         <div className='projectPage' ref={sectionProject}>
-          <ProjectsPage headingRef={headingRefProject}/>
+          <ProjectsPage headingRef={headingRefProject} />
         </div>
-        
+
       </div>
-      <Pagination refList={[sectionLanding, sectionAbout, sectionSkills, sectionProject]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />
+      {isScrollLocking ? (<Pagination refList={[sectionLanding, sectionAbout, sectionSkills, sectionProject]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />) : null}
     </div>
-    
+
   )
 }
 

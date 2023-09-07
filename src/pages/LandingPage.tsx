@@ -15,8 +15,8 @@ const LandingPage: React.FC<landingProps> = ({ headingRef, learnMoreRef, scroll 
 
     const word = useTypedWords(words)
     return (
-        <div className="section w-screen h-screen bg-background-primary flex  items-center justify-center ">
-            <div className="heading inline-flex lg:items-start items-center flex-col">
+        <div className="section w-screen h-screen bg-background-primary flex items-center justify-center ">
+            <div className="heading flex items-center w-full flex-col justify-center">
                 <span className="font-semibold text-devPink text-3xl" ref={headingRef}>Who Am I?</span>
                 <span className="text-white font-black text-7xl">I'm Aarav Jain</span>
                 <span className="text-devGrey font-normal text-7xl lg:text-left text-center">Someone who enjoys <span className="typewriter">{word}</span></span>
