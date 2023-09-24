@@ -1,12 +1,13 @@
 
 import useTypedWords from "../../../hooks/useTypedWords"
+import SmSectionType from "../../../type/SmsectionType"
 
 const words = ["creating", "learning", "coding", "playing"]
-const LandingPage = () => {
+const LandingPage: React.FC<SmSectionType> = ({ headingRef }) => {
 
     const word = useTypedWords(words)
     return (
-        <div className={` w-screen h-screen bg-background-primary flex items-center justify-center`}>
+        <div className={` w-screen h-screen bg-background-primary flex items-center justify-center`} ref={headingRef}>
             <div className={`heading flex items-center w-full flex-col justify-center gap-4`}>
                 <span className="font-semibold text-devPink text-3xl">Who Am I?</span>
                 <span className="text-white font-black text-7xl text-center">I'm Aarav Jain</span>
@@ -17,4 +18,4 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage; 
+export default LandingPage;
