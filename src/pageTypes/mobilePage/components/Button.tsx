@@ -6,12 +6,12 @@ type ButtonProps = {
 }
 const Button: React.FC<ButtonProps> = ({ show, setShow }) => {
 
-    const genericHamburgerLine = `h-4 w-14 my-1 rounded-full ${show ? "bg-background-primary" : "bg-devPurple"} transition ease transform duration-300`;
+    const genericHamburgerLine = `h-1 w-8 my-1 rounded-full ${show ? "bg-background-primary" : "bg-devPurple"} transition ease transform duration-300`;
 
 
     return (
         <button
-            className="flex flex-col h-12 w-14 mt-8 justify-center items-center group absolute z-[2]"
+            className="flex flex-col h-12 w-14 mt-8 justify-center items-center group absolute z-[2] mr-8"
             onClick={() => {
                 setShow(!show)
             }}
