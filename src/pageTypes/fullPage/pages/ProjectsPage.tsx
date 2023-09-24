@@ -1,4 +1,4 @@
-import SectionProps from "../type/sectionType"
+import SectionProps from "../../../type/sectionType"
 // import Projects from "../components/Projects"
 // import { useState } from "react"
 // import ProjectPagination from "../components/projectsPagination/ProjectPagination"
