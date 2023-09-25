@@ -38,9 +38,9 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
             <div className="heading inline-flex items-center flex-col gap-8">
                 <span className="font-semibold text-devPink text-7xl " ref={headingRef}>Projects</span>
                 <span className="text-devGrey font-normal text-3xl text-center w-1/3">Here is my showcase of everything memorable that I have created. I am always looking for ways to show off my skills, and create something exciting. </span>
-                <div className="group flex flex-row items-center justify-center gap-4 hover:cursor-pointer ">
+                <div className="hovered group flex flex-row items-center justify-center gap-4">
                     <span className="text-devPink text-3xl">Learn More</span>
-                    <FontAwesomeIcon icon={faChevronRight} className="text-devPink text-3xl group-hover:translate-x-6 transition" />
+                    <FontAwesomeIcon icon={faChevronRight} className=" text-devPink text-3xl group-hover:translate-x-6 transition" />
                 </div>
             </div>
         </div>

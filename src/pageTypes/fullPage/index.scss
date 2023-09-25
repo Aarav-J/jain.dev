@@ -50,9 +50,15 @@
 }
 
 
+html *, 
+body * { 
+  cursor: none;
+}
+
 body {
   background: #1E1E1E;
   overflow-x: auto;
+  
 }
 
 

@@ -3,7 +3,7 @@ import AboutPage from './pages/AboutPage.tsx'
 import SkillsPage from './pages/SkilsPage.tsx'
 import Navbar from '../../components/Navbar.tsx'
 import "./index.scss"
-
+import Cursor from '../../components/Cursor.jsx'
 import Pagination from '../../components/pagination/Pagination.tsx'
 import "./section.scss"
 import { useState, useRef, useEffect } from "react"
@@ -51,6 +51,7 @@ function LgMd() {
   }), [section1IsVisible, section2IsVisible, section3IsVisible, section4IsVisible])
   return (
     <div className='body'>
+
       <div>
         <Navbar />
 
@@ -70,6 +71,7 @@ function LgMd() {
         </div>
 
       </div>
+      <Cursor />
       (<Pagination refList={[sectionLanding, sectionAbout, sectionSkills, sectionProject]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />)
     </div>
 
