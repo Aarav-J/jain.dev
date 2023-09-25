@@ -4,7 +4,7 @@ const Navbar = () => {
     const isScrollLocking = useMediaQuery('(min-width: 1024px)')
     return (
         <div className="md:z-10 z-0 absolute flex justify-between bg-background-primary h-32 items-center w-screen px-24">
-            <span className="text-[2.625rem] font-black bg-navbarTitle bg-clip-text text-transparent">JAIN.DEV</span>
+            <span className="text-[2.625rem] font-black bg-navbarTitle bg-clip-text text-transparent bg-[size:200%] animation-gradient-move">JAIN.DEV</span>
             {isScrollLocking ? <Spotify /> : null}
 
         </div>
