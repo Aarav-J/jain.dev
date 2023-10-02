@@ -11,16 +11,16 @@ const SkillsPage: React.FC<SectionProps> = ({ headingRef }) => {
                 <span className="text-devGrey font-normal text-3xl text-center w-3/5">I have been programming for 3 years of my life, and I'm always open to learning new skills </span>
                 <div className="grid grid-cols-2 grid-rows-5 md:grid-cols-5 md:grid-rows-2 gap-x-4 gap-y-4">
                     {/* <SassIcon className="fill-devGrey" /> */}
-                    <FontAwesomeIcon icon={faSass} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faJsSquare} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faCss3Alt} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faBootstrap} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faGitAlt} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faReact} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faPython} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <FontAwesomeIcon icon={faHtml5} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
-                    <TypeScriptIcon />
-                    <FontAwesomeIcon icon={faFigma} className="text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " />
+                    <a href="https://sass-lang.com/"><FontAwesomeIcon icon={faSass} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><FontAwesomeIcon icon={faJsSquare} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><FontAwesomeIcon icon={faCss3Alt} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                                <a href="https://getbootstrap.com/"><FontAwesomeIcon icon={faBootstrap} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                                    <a href="https://git-scm.com/"><FontAwesomeIcon icon={faGitAlt} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                                        <a href="https://react.dev/"><FontAwesomeIcon icon={faReact} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                                            <a href="https://www.python.org/"><FontAwesomeIcon icon={faPython} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                                                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><FontAwesomeIcon icon={faHtml5} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
+                                                    <a href="https://www.typescriptlang.org/"><TypeScriptIcon /></a>
+                                                        <a href="https://www.figma.com/"><FontAwesomeIcon icon={faFigma} className="hovered text-devGrey h-20 w-20 hover:text-devPurple hover:scale-125 transition duration-150 ease-in " /></a>
 
                 </div>
             </div>
