@@ -9,6 +9,7 @@ import "./section.scss"
 import { useState, useRef, useEffect } from "react"
 import useOnScreen from "../../hooks/useOnScreem.ts"
 import ProjectsPage from './pages/ProjectsPage.tsx'
+
 import Github from '../../components/Github.tsx'
 function LgMd() {
 
@@ -51,29 +52,31 @@ function LgMd() {
     }
   }), [section1IsVisible, section2IsVisible, section3IsVisible, section4IsVisible])
   return (
+    
     <div className='body'>
+        <div>
+          <Navbar />
+          <Github />
+        </div>
+        <div className="container">
+          <div className='landingPage' ref={sectionLanding}>
+            <LandingPage scroll={scrollTo} learnMoreRef={sectionAbout} headingRef={headingRefLanding} />
+          </div>
+          <div className='aboutPage' ref={sectionAbout}>
+            <AboutPage headingRef={headingRefAbout} />
+          </div>
+          <div className='skillPage' ref={sectionSkills}>
+            <SkillsPage headingRef={headingRefSkills} />
+          </div>
+          <div className='projectPage' ref={sectionProject}>
+            <ProjectsPage headingRef={headingRefProject} />
+          </div>
 
-      <div>
-        <Navbar />
-        <Github />
-      </div>
-      <div className="container">
-        <div className='landingPage' ref={sectionLanding}>
-          <LandingPage scroll={scrollTo} learnMoreRef={sectionAbout} headingRef={headingRefLanding} />
         </div>
-        <div className='aboutPage' ref={sectionAbout}>
-          <AboutPage headingRef={headingRefAbout} />
-        </div>
-        <div className='skillPage' ref={sectionSkills}>
-          <SkillsPage headingRef={headingRefSkills} />
-        </div>
-        <div className='projectPage' ref={sectionProject}>
-          <ProjectsPage headingRef={headingRefProject} />
-        </div>
-
-      </div>
+        <Pagination refList={[sectionLanding, sectionAbout, sectionSkills, sectionProject]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />
+     
+      
       <Cursor />
-      (<Pagination refList={[sectionLanding, sectionAbout, sectionSkills, sectionProject]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />)
     </div>
 
   )
