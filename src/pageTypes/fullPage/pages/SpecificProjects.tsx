@@ -110,10 +110,16 @@ const SpecificProjects = () => {
                                 
                         </div>
                     </div>
-                    <div className='flex justify-center items-center hovered w-1/3'>
-                        {data[selectedProject].website ? <FontAwesomeIcon icon={faGithub} className='text-5xl text-devGrey hovered'/> : null}
-                        
-                    </div>
+                    {data[selectedProject].website && (
+                        <div className='flex justify-center items-center hovered w-1/3'>
+                            <a href={`https://${data[selectedProject].github}`} className='hovered'>
+                                <FontAwesomeIcon 
+                                icon={faGithub} 
+                                className='text-5xl text-devGrey hovered'
+                                />
+                            </a>
+                        </div>
+                    )}
                 </div>
             </div>
        </div>
