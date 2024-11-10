@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./Cursor.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+
 const Cursor = () => {
   const cursorDotOutline = useRef<HTMLDivElement>(null);
   const cursorDot = useRef<HTMLDivElement>(null);

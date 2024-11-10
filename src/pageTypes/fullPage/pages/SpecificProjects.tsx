@@ -6,9 +6,6 @@ import { faGithub, faJs, faNode, faReact, } from '@fortawesome/free-brands-svg-i
 import Navbar from '../../../components/Navbar';
 import ProjectPagination from '../../../components/projectsPagination/ProjectPagination';
 import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript } from 'react-icons/si';
-
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 // import Data from "./Data"
 interface IconProps {
     tech: string;

@@ -1,4 +1,3 @@
-import  {useState, useRef} from 'react';
 import Cursor from '../../../components/Cursor';
 import {faRightLong, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon,} from '@fortawesome/react-fontawesome';
