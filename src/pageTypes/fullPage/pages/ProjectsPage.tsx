@@ -35,8 +35,8 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
 
     // const [activeProject, setActiveProject] = useState(0)
     const navigate = useNavigate()
-    return (
-        <div className="section w-screen h-screen bg-background-primary flex mt-8 md:mt-0 items-center justify-center ">
+    return ( 
+        <div className="section w-screen h-screen bg-background-primary flex md:mt-0 items-center justify-center ">
             <div className="heading inline-flex items-center flex-col gap-8">
                 <span className="font-semibold text-devPink text-7xl " ref={headingRef}>Projects</span>
                 <span className="text-devGrey font-normal text-3xl text-center w-1/3">Here is my showcase of everything memorable that I have created. I am always looking for ways to show off my skills, and create something exciting. </span>

@@ -2,6 +2,7 @@ import { faJsSquare, faSass, faCss3Alt, faBootstrap, faGitAlt, faReact, faPython
 import SmSectionType from "../../../type/SmsectionType"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TypeScriptIcon from "../../../components/TypeScriptIcon"
+import CplusPlus from "../../../components/CplusPlus"
 
 const SkillsPage: React.FC<SmSectionType> = ({ headingRef }) => {
     return (
@@ -14,7 +15,8 @@ const SkillsPage: React.FC<SmSectionType> = ({ headingRef }) => {
                     <FontAwesomeIcon icon={faSass} className="text-devGrey h-20 w-20" />
                     <FontAwesomeIcon icon={faJsSquare} className="text-devGrey h-20 w-20" />
                     <FontAwesomeIcon icon={faCss3Alt} className="text-devGrey h-20 w-20" />
-                    <FontAwesomeIcon icon={faBootstrap} className="text-devGrey h-20 w-20" />
+                    {/* <FontAwesomeIcon icon={faBootstrap} className="text-devGrey h-20 w-20" /> */}
+                    <CplusPlus />
                     <FontAwesomeIcon icon={faGitAlt} className="text-devGrey h-20 w-20 " />
                     <FontAwesomeIcon icon={faReact} className="text-devGrey h-20 w-20" />
                     <FontAwesomeIcon icon={faPython} className="text-devGrey h-20 w-20" />
