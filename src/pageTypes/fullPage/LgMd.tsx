@@ -25,9 +25,9 @@ function LgMd() {
   const sectionProject = useRef<HTMLDivElement>(null);
   const headingRefProject = useRef<HTMLHeadingElement>(null);
   const section1IsVisible = useOnScreen(headingRefLanding)
-  const section2IsVisible = useOnScreen(headingRefAbout)
+  const section2IsVisible = useOnScreen(headingRefProject)
   const section3IsVisible = useOnScreen(headingRefSkills)
-  const section4IsVisible = useOnScreen(headingRefProject)
+  const section4IsVisible = useOnScreen(headingRefAbout)
   const [activeNumber, setActiveNumber] = useState<number>(0)
   useEffect((() => {
     if (section1IsVisible) {
@@ -60,20 +60,21 @@ function LgMd() {
         </div>
         <div className="container">
           <div className='landingPage' ref={sectionLanding}>
-            <LandingPage scroll={scrollTo} learnMoreRef={sectionAbout} headingRef={headingRefLanding} />
-          </div>
-          <div className='aboutPage' ref={sectionAbout}>
-            <AboutPage headingRef={headingRefAbout} />
-          </div>
-          <div className='skillPage' ref={sectionSkills}>
-            <SkillsPage headingRef={headingRefSkills} />
+            <LandingPage scroll={scrollTo} learnMoreRef={sectionProject} headingRef={headingRefLanding} />
           </div>
           <div className='projectPage' ref={sectionProject}>
             <ProjectsPage headingRef={headingRefProject} />
           </div>
+          <div className='skillPage' ref={sectionSkills}>
+            <SkillsPage headingRef={headingRefSkills} />
+          </div>
+          
+          <div className='aboutPage' ref={sectionAbout}>
+            <AboutPage headingRef={headingRefAbout} />
+          </div>
 
         </div>
-        <Pagination refList={[sectionLanding, sectionAbout, sectionSkills, sectionProject]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />
+        <Pagination refList={[sectionLanding, sectionProject, sectionSkills, sectionAbout]} activeNumber={activeNumber} setActiveNumber={setActiveNumber} />
      
       
       <Cursor />

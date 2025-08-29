@@ -20,10 +20,10 @@ const LandingPage: React.FC<landingProps> = ({ headingRef, learnMoreRef, scroll 
                 <span className="font-semibold text-devPink text-3xl" ref={headingRef}>Who Am I?</span>
                 <span className="text-white font-black text-7xl text-center">I'm Aarav Jain</span>
                 <span className="text-devGrey font-normal text-7xl lg:text-left text-center">Someone who enjoys <span className="typewriter">{word}</span></span>
-                <button className="hovered text-xl font-normal w-32 h-12 rounded-2xl border-devPink border-2 border-solid text-white mt-2" onClick={() => {
+                <button className="hovered text-xl font-semibold px-4 h-12 rounded-2xl border-devPink border-2 border-solid text-white mt-6" onClick={() => {
                     scroll(learnMoreRef)
 
-                }}>Learn More</button>
+                }}>See my Projects!</button>
             </div>
         </div>
     )
