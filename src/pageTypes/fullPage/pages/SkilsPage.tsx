@@ -1,4 +1,4 @@
-import { faJsSquare, faSass, faCss3Alt, faBootstrap, faGitAlt, faReact, faPython, faHtml5, faFigma } from "@fortawesome/free-brands-svg-icons"
+import { faJsSquare, faSass, faCss3Alt, faGitAlt, faReact, faPython, faHtml5, faFigma } from "@fortawesome/free-brands-svg-icons"
 import SectionProps from "../../../type/sectionType"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import TypeScriptIcon from "../../../components/TypeScriptIcon"

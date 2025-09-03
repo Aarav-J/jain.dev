@@ -1,79 +1,133 @@
 import Cursor from '../../../components/Cursor';
-import {faRightLong, faGlobe } from '@fortawesome/free-solid-svg-icons';
+// import {faRightLong, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon,} from '@fortawesome/react-fontawesome';
-import { faGithub, faJs, faNode, faReact, } from '@fortawesome/free-brands-svg-icons';
+import {faRightLong, faGlobe, faMobileAlt, faFlask, faLaptopCode } from '@fortawesome/free-solid-svg-icons';
 // import Navbar from '../components/Navbar';
-import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript } from 'react-icons/si';
+import { faGithub, faJs, faNode, faReact, } from '@fortawesome/free-brands-svg-icons';
+import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript, SiKotlin, SiSwift, SiTensorflow, SiExpo, SiOverleaf, SiOpenai, SiSupabase } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
-
+// import Data from "./Data"
 // import Data from "./Data"
 interface IconProps {
     tech: string;
 }
+interface ProjectData {
+  name: string;
+  description: string;
+  website: string | null;
+  github: string;
+  image: string;
+  technologies: string[];
+  type: 'web' | 'mobile' | 'research';
+}
 
 
-const data = [ 
+
+const data: ProjectData[] = [ 
     { 
-        name: "TicTacToe^2", 
-        description: "Inspired by playing this game with a friend during Spanish class, I built a multiplayer version that adds a strategic twist to the classic game. Using React.js, Node.js, and Socket.io, the app provides real-time gameplay with smooth synchronization across devices. The clean, responsive UI, styled with Tailwind CSS, includes dark mode and offers a seamless user experience. Overall, this project combines nostalgic gameplay with modern web technologies, delivering an engaging and dynamic experience for all players.", 
+        name: "Truth Decay", 
+        description: "Rapid improvements in large language models have unveiled a critical challenge in human-AI interaction: sycophancy. In this context, sycophancy refers to the tendency of models to excessively agree with or flatter users, often at the expense of factual accuracy. While previous studies have primarily analyzed this behavior in single-turn interactions, its persistence and evolution in multi-step conversations remain largely unexplored. We introduce TRUTH DECAY, a benchmark specifically designed to evaluate sycophancy in extended dialogues, where language models must navigate iterative user feedback, challenges, and persuasion. We prompt models to elicit four types of sycophantic biases. We then propose and test sycophancy reduction strategies, evaluating their effectiveness beyond single-step interactions.",
         website: null, 
-        github: "github.com/Aarav-J/tictactoesquared", 
-        image: "tictactoeimage.png",
-        technologies: ["react", "node", "js", "socket", "tailwind"]
+        github: "arxiv.org/pdf/2503.11656", 
+        image: "research.png",
+        technologies: ["python",  "overleaf"],
+        type: "research"
+    },
+    { 
+        name: "MarvelOracle", 
+        description: "A full-stack RAG (Retrieval-Augmented Generation) application that lets you chat with the Marvel Universe using AI. Ask questions about Marvel characters, storylines, and lore with context-aware responses powered by vector search and GPT-4. Marvel wiki pages were scraped using python and then embedded into a pinecone vector database. ", 
+        website: 'marveloracle.aaravj.xyz', 
+        github: "github.com/Aarav-J/marveloracle", 
+        image: "marveloracle.png",
+        technologies: ["react", "python", "js",  "tailwind", "openai"],
+        type: "web"
     }, 
+    {
+        name: "AaravSim", 
+        description: "Aaravsim is a full-stack stock market simulator and dashboard application. It allows users to simulate trading, view stock data, manage portfolios, and access market news, all in a modern web interface. Built with React for the frontend and Flask for the backend exposted through a REST API endpoint.", 
+        website: "aaravsim.aaravj.xyz", 
+        github: "github.com/Aarav-J/aaravsim",
+        image: "aaravsim.png",
+        technologies: ['react', 'js', 'python', 'supabase'], 
+        type: "web"
+
+    },
+     { 
+        name: "Stronger", 
+        description: "A comprehensive mobile fitness tracking application built for Android and iOS using React Native. The app monitors workouts, and progress with goals and detailed analytics. Push notifications help users stay motivated.", 
+        website: null, 
+        github: "github.com/Aarav-J/strong2.0", 
+        image: "strong.png",
+        technologies: ["react", "js", "python", "expo"],
+        type: "mobile"
+    },
     { 
         name: "AaravType", 
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorum ullam provident, voluptates in expedita harum totam nostrum quidem eveniet. Quaerat ratione esse incidunt architecto adipisci pariatur dolorem, rem tempore?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia adipisci et minus blanditiis. Inventore unde, dolore doloremque, nam cumque nostrum in ipsa numquam recusandae ullam perspiciatis porro voluptatem. Eligendi, deleniti.", 
+        description: "A sophisticated typing test application designed to help users improve their typing speed and accuracy. The platform features customizable tests, detailed analytics to track progress over time. Built with React to display typing statistics.", 
         website: "aaravtype.aaravj.xyz", 
         github: "github.com/Aarav-J/aaravtypefrontend", 
         image: "aaravtype.png",
-        technologies: ["react", "js", "tailwind", "node", "mongo"]
+        technologies: ["react", "js", "tailwind", "node", "mongo"],
+        type: "web"
     },
-    { 
-        name: "PopFlix", 
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorum ullam provident, voluptates in expedita harum totam nostrum quidem eveniet. Quaerat ratione esse incidunt architecto adipisci pariatur dolorem, rem tempore?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia adipisci et minus blanditiis. Inventore unde, dolore doloremque, nam cumque nostrum in ipsa numquam recusandae ullam perspiciatis porro voluptatem. Eligendi, deleniti.", 
-        website: null, 
-        github: "github.com/Aarav-J/popflix", 
-        image: "placeholder.jpg",
-        technologies: ["react", "js", "axios", "tailwind", "firebase"]
-    },
-    { 
-        name: "Spotify Controller", 
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorum ullam provident, voluptates in expedita harum totam nostrum quidem eveniet. Quaerat ratione esse incidunt architecto adipisci pariatur dolorem, rem tempore?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia adipisci et minus blanditiis. Inventore unde, dolore doloremque, nam cumque nostrum in ipsa numquam recusandae ullam perspiciatis porro voluptatem. Eligendi, deleniti.", 
-        website: null, 
-        github: "github.com/Aarav-J/spotifycontroller", 
-        image: "placeholder.jpg",
-        technologies: ["python", "cplusplus", "axios", "flask"]
-    },
+   
+    
 ]
 const SpecificProjectsSm = () => {
    
     const navigate = useNavigate();
     const icon = (tech: IconProps['tech']): JSX.Element | null => { 
-        if(tech === "react") return <FontAwesomeIcon icon={faReact} className='text-5xl text-react'/>
-        if(tech === "node") return <FontAwesomeIcon icon={faNode} className='text-5xl text-node'/>
-        if(tech === "js") return <FontAwesomeIcon icon={faJs} className='text-5xl text-js'/>
-        if(tech === "socket") return <SiSocketdotio className='text-5xl text-white'/>
-        if(tech === "mongo") return <SiMongodb className='text-5xl text-mongo'/>
-        if(tech==="tailwind") return <SiTailwindcss className='text-5xl text-tailwind'/>
-        if(tech==="ts") return <SiTypescript className='text-5xl text-ts'/>
-        if(tech==="axios") return <SiAxios className='text-5xl text-axios'/>
-        if(tech==="python") return <SiPython className='text-5xl text-python'/>
-        if(tech==="flask") return <SiFlask className='text-5xl text-flask'/>
-        if(tech==="c++") return <SiCplusplus className='text-5xl text-cplusplus'/>
-        if(tech==="firebase") return <SiFirebase className='text-5xl text-firebase'/>
-        return null
-    }
+            if(tech === "react") return <FontAwesomeIcon icon={faReact} className='text-5xl text-react'/>
+            if(tech === "node") return <FontAwesomeIcon icon={faNode} className='text-5xl text-node'/>
+            if(tech === "js") return <FontAwesomeIcon icon={faJs} className='text-5xl text-js'/>
+            if(tech === "socket") return <SiSocketdotio className='text-5xl text-white'/>
+            if(tech === "mongo") return <SiMongodb className='text-5xl text-mongo'/>
+            if(tech === "tailwind") return <SiTailwindcss className='text-5xl text-tailwind'/>
+            if(tech === "ts") return <SiTypescript className='text-5xl text-ts'/>
+            if(tech === "axios") return <SiAxios className='text-5xl text-axios'/>
+            if(tech === "python") return <SiPython className='text-5xl text-python'/>
+            if(tech === "flask") return <SiFlask className='text-5xl text-flask'/>
+            if(tech === "cplusplus") return <SiCplusplus className='text-5xl text-cplusplus'/>
+            if(tech === "firebase") return <SiFirebase className='text-5xl text-firebase'/>
+            // if(tech === "android") return <FontAwesomeIcon icon={faAndroid} className='text-5xl text-android'/>
+            // if(tech === "ios") return <FontAwesomeIcon icon={faApple} className='text-5xl text-apple'/>
+            if(tech === "tensorflow") return <SiTensorflow className='text-5xl text-tensorflow'/>
+            if(tech === "supabase") return <SiSupabase className='text-5xl text-supabase'/>
+            if(tech === "openai") return <SiOpenai className='text-5xl text-openai'/>
+            if(tech === "expo") return <SiExpo className='text-5xl text-white'/>
+            if(tech === "overleaf") return <SiOverleaf className='text-5xl text-overleaf'/>
+            return null
+        }
   return (
     <div className='w-full bg-background-primary flex flex-col items-center'>
       <span className="text-[2.625rem] hovered font-black bg-navbarTitle bg-clip-text text-transparent bg-[size:200%] animation-gradient-move" onClick={() => {navigate("/")}}>JAIN.DEV</span>
       <div className='flex flex-col items-center w-full mt-8 px-4'>
         {data.map((project, index) => (
           <div key={index} className='flex flex-col items-center w-full mb-12'>
-            {/* Project name */}
-            <span className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-display font-bold tracking-wide text-center'>
-              {project.name}
-            </span>
+       
+
+            {/* Project name and type badge */}
+                        <div className="flex flex-col items-center gap-2">
+                            <span className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white font-display font-bold tracking-wide text-center'>
+                                {project.name}
+                            </span>
+                            <div className={`px-3 py-2 rounded-md flex items-center gap-2 ${
+                                project.type === 'web' ? 'bg-blue-500/20 text-blue-300' : 
+                                project.type === 'mobile' ? 'bg-green-500/20 text-green-300' : 
+                                'bg-purple-500/20 text-purple-300'
+                            }`}>
+                                <FontAwesomeIcon icon={
+                                    project.type === 'web' ? faLaptopCode :
+                                    project.type === 'mobile' ? faMobileAlt :
+                                    faFlask
+                                } />
+                                <span className='text-sm font-medium'>
+                                    {project.type === 'web' ? 'Web Project' : 
+                                    project.type === 'mobile' ? 'Mobile App' : 
+                                    'Research Project'}
+                                </span>
+                            </div>
+                        </div>
             {/* Image and link */}
             <div className='flex flex-col items-center w-full mt-6'>
               <div className='relative w-full sm:w-3/4 md:w-2/3'>
