@@ -4,7 +4,7 @@ import { FontAwesomeIcon,} from '@fortawesome/react-fontawesome';
 import {faRightLong, faGlobe, faMobileAlt, faFlask, faLaptopCode } from '@fortawesome/free-solid-svg-icons';
 // import Navbar from '../components/Navbar';
 import { faGithub, faJs, faNode, faReact, } from '@fortawesome/free-brands-svg-icons';
-import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript, SiKotlin, SiSwift, SiTensorflow, SiExpo, SiOverleaf, SiOpenai, SiSupabase } from 'react-icons/si';
+import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript,  SiTensorflow, SiExpo, SiOverleaf, SiOpenai, SiSupabase } from 'react-icons/si';
 import { useNavigate } from 'react-router-dom';
 // import Data from "./Data"
 // import Data from "./Data"

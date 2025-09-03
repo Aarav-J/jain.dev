@@ -5,8 +5,9 @@ import { FontAwesomeIcon,} from '@fortawesome/react-fontawesome';
 import { faGithub, faJs, faNode, faReact, } from '@fortawesome/free-brands-svg-icons';
 import Navbar from '../../../components/Navbar';
 import ProjectPagination from '../../../components/projectsPagination/ProjectPagination';
-import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript, SiKotlin, SiSwift, SiTensorflow, SiExpo, SiOverleaf, SiOpenai, SiSupabase } from 'react-icons/si';
+import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript, SiTensorflow, SiExpo, SiOverleaf, SiOpenai, SiSupabase } from 'react-icons/si';
 
+import { motion, AnimatePresence } from 'framer-motion';
 // import Data from "./Data"
 interface IconProps {
     tech: string;
@@ -110,119 +111,202 @@ const SpecificProjects = () => {
         setSelectedProject(0);
     }
   return (
-    <div className='w-screen h-screen bg-background-primary items-center flex flex-col justify-start'>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className='w-screen h-screen bg-background-primary items-center flex flex-col justify-start'
+    >
         <Navbar/>
         <div className='mt-20 mb-6 flex flex-row justify-center items-center gap-6'>
-          <button 
+          <motion.button 
             onClick={() => handleProjectTypeChange('all')} 
             className={`px-6 py-2 rounded-md ${projectType === 'all' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'}`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             All Projects
-          </button>
-          <button 
+          </motion.button>
+          <motion.button 
             onClick={() => handleProjectTypeChange('web')} 
             className={`px-6 py-2 rounded-md ${projectType === 'web' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'} flex items-center gap-2`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <FontAwesomeIcon icon={faLaptopCode} /> Web Projects
-          </button>
-          <button 
+          </motion.button>
+          <motion.button 
             onClick={() => handleProjectTypeChange('mobile')} 
             className={`px-6 py-2 rounded-md ${projectType === 'mobile' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'} flex items-center gap-2`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <FontAwesomeIcon icon={faMobileAlt} /> Mobile Apps
-          </button>
-          <button 
+          </motion.button>
+          <motion.button 
             onClick={() => handleProjectTypeChange('research')} 
             className={`px-6 py-2 rounded-md ${projectType === 'research' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'} flex items-center gap-2`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
             <FontAwesomeIcon icon={faFlask} /> Research
-          </button>
+          </motion.button>
         </div>
 
        <div className='flex flex-row justify-center items-center gap-6 h-full w-full'>
          {/* right side */}
             <div className='flex flex-col w-1/2 h-full justify-center items-start pl-24 gap-6 '>
                 <div className='flex flex-col gap-2'>
-                  <div className='flex items-center gap-3'>
-                    <span className='text-7xl text-white font-display font-bold tracking-wide'>
-                      {filteredProjects[selectedProject].name}
-                    </span>
-                    <div className={`px-3 py-2 rounded-md flex items-center gap-2 ${
-                      filteredProjects[selectedProject].type === 'web' ? 'bg-blue-500/20 text-blue-300' : 
-                      filteredProjects[selectedProject].type === 'mobile' ? 'bg-green-500/20 text-green-300' : 
-                      'bg-purple-500/20 text-purple-300'
-                    }`}>
-                      <FontAwesomeIcon icon={
-                        filteredProjects[selectedProject].type === 'web' ? faLaptopCode :
-                        filteredProjects[selectedProject].type === 'mobile' ? faMobileAlt :
-                        faFlask
-                      } />
-                      <span className='text-sm font-medium'>
-                        {filteredProjects[selectedProject].type === 'web' ? 'Web Project' : 
-                         filteredProjects[selectedProject].type === 'mobile' ? 'Mobile App' : 
-                         'Research'}
+                  <AnimatePresence mode="wait">
+                    <motion.div 
+                      key={selectedProject}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className='flex items-center gap-3'
+                    >
+                      <span className='text-7xl text-white font-display font-bold tracking-wide'>
+                        {filteredProjects[selectedProject].name}
                       </span>
-                    </div>
-                  </div>
+                      <div className={`px-3 py-2 rounded-md flex items-center gap-2 ${
+                        filteredProjects[selectedProject].type === 'web' ? 'bg-blue-500/20 text-blue-300' : 
+                        filteredProjects[selectedProject].type === 'mobile' ? 'bg-green-500/20 text-green-300' : 
+                        'bg-purple-500/20 text-purple-300'
+                      }`}>
+                        <FontAwesomeIcon icon={
+                          filteredProjects[selectedProject].type === 'web' ? faLaptopCode :
+                          filteredProjects[selectedProject].type === 'mobile' ? faMobileAlt :
+                          faFlask
+                        } />
+                        <span className='text-sm font-medium'>
+                          {filteredProjects[selectedProject].type === 'web' ? 'Web Project' : 
+                           filteredProjects[selectedProject].type === 'mobile' ? 'Mobile App' : 
+                           'Research'}
+                        </span>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
                 
                 <div className='flex flex-col gap-3'>
-                    <span className='text-3xl text-devPink font-display font-semibold'>Description</span>
-                    <span className='w-5/6 text-devGrey font-display font-light'>{filteredProjects[selectedProject].description}</span>
+                  <span className='text-3xl text-devPink font-display font-semibold'>Description</span>
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={selectedProject}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -15 }}
+                      transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
+                      className='w-5/6 text-devGrey font-display font-light'
+                    >
+                      {filteredProjects[selectedProject].description}
+                    </motion.span>
+                  </AnimatePresence>
                 </div>
             </div>
             {/* Left side */}
             <div className='flex flex-col w-1/2 h-full justify-center items-center gap-9'>
-                <div className='flex justify-center items-center relative w-full h-auto'>
-                    <img 
-                      src={`/${filteredProjects[selectedProject].image}`} 
-                      alt={filteredProjects[selectedProject].name}
-                      className={`rounded-md border-solid border-2 border-devPurple ${
-                         'w-2/3 aspect-auto' 
-                        // filteredProjects[selectedProject].type === 'mobile' ? 'w-1/3 aspect-[9/16]' : 
-                        // 'w-3/4 aspect-[4/3]'
-                      }`}
-                    />
-                    <div className='goto-panel bg-goto rounded-b-md py-3 px-6 absolute bottom-0 border-solid border-l-2 border-b-2 border-r-2 border-devPurple'
-                      style={{
-                        // width: filteredProjects[selectedProject].type === 'mobile' ? '33.33%' : 
-                        //        filteredProjects[selectedProject].type === 'research' ? '75%' : '66.67%'
-                        width: '66.67%'
-                      }}>
-                        <a href={`https://${filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}`} className='hovered'>
-                        <div className='flex flex-row justify-between w-full'>
-                            <div className='flex flex-row gap-3 items-center justify-center'>
-                                <FontAwesomeIcon icon={filteredProjects[selectedProject].website ? faGlobe : faGithub} className='text-white'/>
-                                <span className='text-white'>{filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}</span>
+                <div className='flex justify-center items-center relative w-full h-auto overflow-hidden'>
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={selectedProject} 
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -50 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="w-full flex justify-center"
+                      >
+                        <img 
+                          src={`/${filteredProjects[selectedProject].image}`} 
+                          alt={filteredProjects[selectedProject].name}
+                          className={`rounded-md border-solid border-2 border-devPurple ${
+                             'w-2/3 aspect-auto' 
+                          }`}
+                        />
+                        <div className='goto-panel bg-goto rounded-b-md py-3 px-6 absolute bottom-0 border-solid border-l-2 border-b-2 border-r-2 border-devPurple'
+                          style={{ width: '66.67%' }}>
+                            <a href={`https://${filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}`} className='hovered'>
+                            <div className='flex flex-row justify-between w-full'>
+                                <div className='flex flex-row gap-3 items-center justify-center'>
+                                    <FontAwesomeIcon icon={filteredProjects[selectedProject].website ? faGlobe : faGithub} className='text-white'/>
+                                    <span className='text-white'>{filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}</span>
+                                </div>
+                                <div>
+                                    <FontAwesomeIcon icon={faRightLong} className='text-white w-9'/>
+                                </div>
                             </div>
-                            <div>
-                                <FontAwesomeIcon icon={faRightLong} className='text-white w-9'/>
-                            </div>
+                            </a>
                         </div>
-                        </a>
-                    </div>
+                      </motion.div>
+                    </AnimatePresence>
                 </div>
                 <div className='flex flex-row w-full justify-between px-40'>
                     <div className='flex flex-col items-start justify-start w-full gap-4'>
-                        <div className='flex flex-row gap-4 justify-start items-center h-fit'>
-                            {filteredProjects[selectedProject].technologies.map((tech, index) => {
-                                return (
-                                    <div key={index} className='flex justify-center items-center hovered'>
-                                        {icon(tech)}
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={selectedProject}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                                className='flex flex-row gap-4 justify-start items-center h-fit'
+                            >
+                                {filteredProjects[selectedProject].technologies.map((tech, index) => {
+                                    return (
+                                        <motion.div 
+                                            key={`${selectedProject}-${tech}-${index}`} 
+                                            className='flex justify-center items-center hovered'
+                                            variants={{
+                                                hidden: { opacity: 0, scale: 0.6, y: 20 },
+                                                visible: { 
+                                                    opacity: 1, 
+                                                    scale: 1, 
+                                                    y: 0,
+                                                    transition: { 
+                                                        delay: 0.1 + (index * 0.08),
+                                                        duration: 0.5,
+                                                        type: "spring",
+                                                        stiffness: 100
+                                                    }
+                                                },
+                                                exit: { 
+                                                    opacity: 0, 
+                                                    scale: 0.6, 
+                                                    y: -20,
+                                                    transition: { duration: 0.2 }
+                                                }
+                                            }}
+                                        >
+                                            {icon(tech)}
+                                        </motion.div>
+                                    )
+                                })}
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
                     {filteredProjects[selectedProject].website && filteredProjects[selectedProject].github && (
-                        <div className='flex justify-center items-center hovered w-1/3'>
-                            <a href={`https://${filteredProjects[selectedProject].github}`} className='hovered'>
-                                <FontAwesomeIcon 
-                                icon={faGithub} 
-                                className='text-5xl text-devGrey hovered'
-                                />
-                            </a>
-                        </div>
+                        <AnimatePresence mode="wait">
+                            <motion.div 
+                                key={selectedProject}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
+                                className='flex justify-center items-center hovered w-1/3'
+                            >
+                                <a href={`https://${filteredProjects[selectedProject].github}`} className='hovered'>
+                                    <FontAwesomeIcon 
+                                    icon={faGithub} 
+                                    className='text-5xl text-devGrey hovered'
+                                    />
+                                </a>
+                            </motion.div>
+                        </AnimatePresence>
                     )}
                 </div>
             </div>
@@ -237,7 +321,7 @@ const SpecificProjects = () => {
       </div>
       
       <Cursor/>
-    </div>
+    </motion.div>
   );
 };
 
