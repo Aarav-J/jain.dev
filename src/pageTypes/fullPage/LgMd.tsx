@@ -11,6 +11,7 @@ import useOnScreen from "../../hooks/useOnScreem.ts"
 import ProjectsPage from './pages/ProjectsPage.tsx'
 
 import Github from '../../components/Github.tsx'
+import LetterboxdCorner from '../../components/LetterboxdCorner.tsx'
 function LgMd() {
 
   const scrollTo = (section: React.RefObject<HTMLDivElement>) => {
@@ -57,6 +58,7 @@ function LgMd() {
         <div>
           <Navbar />
           <Github />
+          <LetterboxdCorner />
         </div>
         <div className="container">
           <div className='landingPage' ref={sectionLanding}>

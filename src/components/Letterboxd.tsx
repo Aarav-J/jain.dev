@@ -59,9 +59,9 @@ const Letterboxd = () => {
   // Render loading state or no film state
   if (error || !film) {
     return (
-      <div className="w-fit px-4 h-28 border-devPurple border-solid border-2 rounded-2xl flex items-center justify-center mr-6">
+      <div className="w-fit px-4 min-h-28 border-devPurple border-solid border-2 rounded-2xl flex items-center justify-center p-2">
         <a href={`https://letterboxd.com/${username}`} className="hovered" target="_blank" rel="noopener noreferrer">
-          <div className="w-16 h-16 rounded-full bg-[#14181c] flex items-center justify-center p-2 m-4">
+          <div className="w-16 h-16 rounded-full bg-[#14181c] flex items-center justify-center p-2 m-2">
             <img src="/letterboxd.svg" alt="Letterboxd" className="w-12 h-12" />
           </div>
         </a>
@@ -71,9 +71,9 @@ const Letterboxd = () => {
 
   // Render film info
   return (
-    <div className="w-fit h-28 border-devPurple border-solid border-2 rounded-2xl flex items-center mr-6 transition-all duration-300 hover:border-opacity-80">
+    <div className="w-fit min-w-28 min-h-28 border-devPurple border-solid border-2 rounded-2xl flex items-center transition-all duration-300 hover:border-opacity-80 p-2">
       <a 
-        className='hovered flex items-center justify-center ml-3'
+        className='hovered flex items-center justify-center'
         target="_blank" 
         rel="noopener noreferrer"
         href={`https://letterboxd.com/${username}/film/${film.slug}`}
@@ -82,34 +82,37 @@ const Letterboxd = () => {
         <img
           src={film.imageLink}
           alt={`Poster of ${film.title}`}
-          className='w-14 h-18 rounded-lg object-cover shadow-sm'
+          className='w-16 h-22 rounded-lg object-cover shadow-sm'
           loading="lazy"
           style={{ objectPosition: 'center' }}
         />
       </a>
-      <div className="flex flex-col items-flex items-start ml-4">
+      <div className="flex flex-col items-flex items-start ml-4 my-2 max-w-[220px]">
         <a 
           href={`https://letterboxd.com/${username}/film/${film.slug}`}
           target="_blank" 
           rel="noopener noreferrer"
           className="hover:text-devPurple transition-colors duration-200"
         >
-          <span className='text-md font-semibold text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]'>
+          <span className='text-md font-semibold text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px]'>
             {film.title?.slice(0, 25)}{(film.title && film.title.length >= 25) ? "..." : null}
           </span>
         </a>
         <div className='text-xs flex flex-row text-devGrey'>
           {returnStars(film.rating)}
         </div>
+        <div className="text-xs text-devGrey italic mt-1 max-w-[200px] line-clamp-2 overflow-hidden">
+          "{film.writtenReview}"
+        </div>
       </div>
       <a 
         href={`https://letterboxd.com/${username}`} 
-        className="hovered ml-auto" 
+        className="hovered ml-auto self-center" 
         target="_blank" 
         rel="noopener noreferrer"
         aria-label="View Letterboxd profile"
       >
-        <div className="w-12 h-12 rounded-full bg-[#14181c] flex items-center justify-center p-2 hover:bg-[#2c3440] transition-colors duration-200 mr-3">
+        <div className="w-12 h-12 rounded-full bg-[#14181c] flex items-center justify-center p-2 hover:bg-[#2c3440] transition-colors duration-200 mr-2">
           <img src="/letterboxd.svg" alt="Letterboxd" className="w-8 h-8" />
         </div>
       </a>

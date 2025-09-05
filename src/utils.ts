@@ -38,7 +38,7 @@ export async function getRecentlyWatched(): Promise<LetterboxdFilm | null> {
             day: data.day,
             slug: data.slug,
             rating: data.rating,
-            writtenReview: data.writtenReview,
+            writtenReview: data.written_review,
             imageLink: data["image-link"],
             cachedAt: data.cachedAt
         };
