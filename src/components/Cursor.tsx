@@ -12,9 +12,7 @@ const Cursor = () => {
   const [cursorVisible, setCursorVisible] = useState(false);
   const [cursorEnlarged, setCursorEnlarged] = useState(false);
 
-  /**
-   * Mouse Moves
-   */
+  
   const onMouseMove = (event: { pageX: number; pageY: number; }) => {
     const { pageX: x, pageY: y } = event;
     setMousePosition({ x, y });
@@ -43,9 +41,6 @@ const Cursor = () => {
     setHeight(window.innerHeight);
   };
 
-  /**
-   * Hooks
-   */
   useEffect(() => {
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseenter", onMouseEnter);
@@ -55,7 +50,7 @@ const Cursor = () => {
     window.addEventListener("resize", onResize);
     requestRef.current = requestAnimationFrame(animateDotOutline);
 
-    // Handle Link Hovers
+   
     handleLinkHovers();
 
     return () => {
@@ -130,11 +125,7 @@ const Cursor = () => {
     [cursorEnlarged, cursorVisible])
 
 
-  /**
-   * Handle LInks
-   * Applies mouseover/out hooks on all links
-   * to trigger cursor animation
-   */
+ 
   function handleLinkHovers() {
     document.querySelectorAll(".hovered").forEach((el) => {
       el.addEventListener("mouseover", () => {
@@ -148,11 +139,7 @@ const Cursor = () => {
     });
   }
 
-  /**
-   * Animate Dot Outline
-   * Aniamtes cursor outline with trailing effect.
-   * @param {number} time
-   */
+
   const animateDotOutline = (time: number) => {
     if (previousTimeRef.current !== undefined) {
       x += (endX - x) / 8;

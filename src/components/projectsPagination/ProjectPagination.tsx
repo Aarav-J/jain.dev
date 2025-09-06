@@ -22,7 +22,7 @@ const ProjectPagination:React.FC<ProjectPaginationProps> = ({activeProject, setA
                         opacity: 1, 
                         y: 0,
                         scale: activeProject === i ? 1.1 : 1,
-                        borderColor: activeProject === i ? "#C517F1" : "#CCCCCC"
+                        borderColor: activeProject === i ? "var(--primary-color)" : "#CCCCCC"
                     }}
                     whileHover={{ scale: 1.1,  }}
                     whileTap={{ scale: 0.95 }}

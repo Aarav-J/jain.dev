@@ -66,9 +66,9 @@ const LandingPage: React.FC<landingProps> = ({ headingRef, learnMoreRef, scroll 
                     animate={{ opacity: 1, y: 0 }}
                     whileHover={{ 
                         scale: 1.05,
-                        backgroundColor: "#9417DE", // devPurple solid fill
+                        backgroundColor: "var(--secondary-color, #9417DE)", // devPurple solid fill
                         color: "#FFFFFF",  // White text
-                        borderColor: "#9417DE", // Match border color
+                        borderColor: "var(--secondary-color, #9417DE)", // Match border color
                     }}
                     whileTap={{ scale: 0.95 }}
                     transition={{ 

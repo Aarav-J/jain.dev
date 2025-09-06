@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import { getRecentlyWatched, LetterboxdFilm } from '../utils';
+import LetterboxdIcon from './LetterboxdIcon';
 
 const Letterboxd = () => {
   const username = 'aaravj'; // Your Letterboxd username
@@ -113,7 +114,7 @@ const Letterboxd = () => {
         aria-label="View Letterboxd profile"
       >
         <div className="w-12 h-12 rounded-full bg-[#14181c] flex items-center justify-center p-2 hover:bg-[#2c3440] transition-colors duration-200 mr-2">
-          <img src="/letterboxd.svg" alt="Letterboxd" className="w-8 h-8" />
+          <LetterboxdIcon/>
         </div>
       </a>
     </div>

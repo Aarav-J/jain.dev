@@ -13,8 +13,8 @@ export default {
         },
 
         devGrey: "#CCCCCC",
-        devPink: "#C517F1",
-        devPurple: "#9417DE",
+        devPink: "var(--primary-color, #C517F1)",
+        devPurple: "var(--secondary-color, #9417DE)",
         white: "#EEDAEA", 
         goto: '#292136', 
         react: "#00D8FE", 
@@ -37,8 +37,9 @@ export default {
        
       },
       backgroundImage: {
-        navbarTitle:
-          "conic-gradient(from 296deg at 103.52% 77.36%, #C517F0 126deg, #9117DD 334deg, #C417F0 350deg, #8317D8 326deg);",
+        navbarTitle: ({ theme }) => {
+          return `conic-gradient(from 296deg at 103.52% 77.36%, var(--primary-color, #C517F0) 126deg, var(--secondary-color, #9117DD) 334deg, var(--primary-color, #C417F0) 350deg, var(--secondary-color, #8317D8) 326deg);`
+        },
       },
 
       keyframes: {
