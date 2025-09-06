@@ -229,8 +229,10 @@ const SpecificProjects = () => {
                              'w-2/3 aspect-auto' 
                           }`}
                         />
-                        <div className='goto-panel bg-goto rounded-b-md py-3 px-6 absolute bottom-0 border-solid border-l-2 border-b-2 border-r-2 border-devPurple'
-                          style={{ width: '66.67%' }}>
+                        <div className='goto-panel rounded-b-md py-3 px-6 absolute bottom-0 border-solid border-l-2 border-b-2 border-r-2 border-devPurple'
+                          style={{ 
+                            width: '66.67%', 
+                            backgroundColor: "color-mix(in srgb, var(--secondary-color) 90%, transparent)"}}>
                             <a href={`https://${filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}`} className='hovered'>
                             <div className='flex flex-row justify-between w-full'>
                                 <div className='flex flex-row gap-3 items-center justify-center'>
@@ -246,7 +248,7 @@ const SpecificProjects = () => {
                       </motion.div>
                     </AnimatePresence>
                 </div>
-                <div className='flex flex-row w-full justify-between px-40'>
+                <div className='flex flex-row w-full justify-between px-36'>
                     <div className='flex flex-col items-start justify-start w-full gap-4'>
                         <AnimatePresence mode="wait">
                             <motion.div
