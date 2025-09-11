@@ -19,7 +19,7 @@ const Navbar = () => {
                     className="text-[2.625rem] hovered font-black bg-navbarTitle bg-clip-text text-transparent bg-[size:200%] animation-gradient-move pointer-events-auto"
                     onClick={() => {navigate("/")}}
                 >
-                    JAIN.DEV
+                    AARAVJ.XYZ
                 </span>
             </div>
             
