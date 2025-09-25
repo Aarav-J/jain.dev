@@ -170,12 +170,18 @@ const SpecificProjectsSm = () => {
               </div>
             </div>
             {/* Technologies */}
-            <div className='flex flex-row flex-wrap justify-center mt-6 gap-4'>
-              {project.technologies.map((tech, techIndex) => (
-                <div key={techIndex} className='flex justify-center items-center hovered'>
-                  {icon(tech)}
+            <div className='flex flex-col items-center w-full mt-6'>
+              <div className='relative w-full sm:w-3/4 md:w-2/3' style={{ width: '75%' }}>
+                <div className='flex flex-row flex-wrap justify-center gap-2 sm:gap-3 md:gap-4'>
+                  {project.technologies.map((tech, techIndex) => (
+                    <div key={techIndex} className='flex justify-center items-center hovered'>
+                      <div className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl'>
+                        {icon(tech)}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
             {/* GitHub link */}
             {project.website && (
