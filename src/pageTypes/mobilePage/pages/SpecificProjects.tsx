@@ -34,6 +34,15 @@ const data: ProjectData[] = [
         type: "research"
     },
     { 
+        name: "Bridge", 
+        description: "My team and I built Bridge during a hackathon to create a platform that combats political echo chambers by pairing users with opposing views for structured, video-based debates. The app uses a full-stack setup with a Next.js + React frontend, a Node.js + Express + Socket.IO backend, Supabase for authentication and data storage, WebRTC for peer-to-peer video, and OpenAI GPT-4 for real-time fact-checking. The result is a technically robust system that manages matchmaking, debate phases, and AI-powered insights to foster respectful and fact-based political discussions.",
+        github: "https://github.com/Aarav-J/Bridge", 
+        website: "devpost.com/software/bridge-8xjdwu", 
+        image: "bridge.jpg",
+        technologies: ["react", "typescript", "tailwind", "openai", "socket", "node", "supabase"],
+        type: "web"
+    },
+    { 
         name: "MarvelOracle", 
         description: "A full-stack RAG (Retrieval-Augmented Generation) application that lets you chat with the Marvel Universe using AI. Ask questions about Marvel characters, storylines, and lore with context-aware responses powered by vector search and GPT-4. Marvel wiki pages were scraped using python and then embedded into a pinecone vector database. ", 
         website: 'marveloracle.aaravj.xyz', 

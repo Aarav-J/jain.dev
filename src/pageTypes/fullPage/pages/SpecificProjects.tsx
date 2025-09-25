@@ -23,6 +23,8 @@ interface ProjectData {
   type: 'web' | 'mobile' | 'research';
 }
 
+
+
 const data: ProjectData[] = [ 
     { 
         name: "Truth Decay", 
@@ -32,6 +34,15 @@ const data: ProjectData[] = [
         image: "research.png",
         technologies: ["python",  "overleaf"],
         type: "research"
+    },
+    { 
+        name: "Bridge", 
+        description: "My team and I built Bridge during a hackathon to create a platform that combats political echo chambers by pairing users with opposing views for structured, video-based debates. The app uses a full-stack setup with a Next.js + React frontend, a Node.js + Express + Socket.IO backend, Supabase for authentication and data storage, WebRTC for peer-to-peer video, and OpenAI GPT-4 for real-time fact-checking. The result is a technically robust system that manages matchmaking, debate phases, and AI-powered insights to foster respectful and fact-based political discussions.",
+        github: "https://github.com/Aarav-J/Bridge", 
+        website: "devpost.com/software/bridge-8xjdwu", 
+        image: "bridge.jpg",
+        technologies: ["react", "typescript", "tailwind", "openai", "socket", "node", "supabase"],
+        type: "web"
     },
     { 
         name: "MarvelOracle", 
@@ -88,6 +99,7 @@ const SpecificProjects = () => {
         if(tech === "flask") return <SiFlask className='text-5xl text-flask'/>
         if(tech === "cplusplus") return <SiCplusplus className='text-5xl text-cplusplus'/>
         if(tech === "firebase") return <SiFirebase className='text-5xl text-firebase'/>
+        if(tech === "typescript") return <SiTypescript className='text-5xl text-ts'/>
         // if(tech === "android") return <FontAwesomeIcon icon={faAndroid} className='text-5xl text-android'/>
         // if(tech === "ios") return <FontAwesomeIcon icon={faApple} className='text-5xl text-apple'/>
         if(tech === "tensorflow") return <SiTensorflow className='text-5xl text-tensorflow'/>
@@ -248,69 +260,69 @@ const SpecificProjects = () => {
                       </motion.div>
                     </AnimatePresence>
                 </div>
-                <div className='flex flex-row w-full justify-between px-36'>
-                    <div className='flex flex-col items-start justify-start w-full gap-4'>
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={selectedProject}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
-                                className='flex flex-row gap-4 justify-start items-center h-fit'
-                            >
-                                {filteredProjects[selectedProject].technologies.map((tech, index) => {
-                                    return (
-                                        <motion.div 
-                                            key={`${selectedProject}-${tech}-${index}`} 
-                                            className='flex justify-center items-center hovered'
-                                            variants={{
-                                                hidden: { opacity: 0, scale: 0.6, y: 20 },
-                                                visible: { 
-                                                    opacity: 1, 
-                                                    scale: 1, 
-                                                    y: 0,
-                                                    transition: { 
-                                                        delay: 0.1 + (index * 0.08),
-                                                        duration: 0.5,
-                                                        type: "spring",
-                                                        stiffness: 100
-                                                    }
-                                                },
-                                                exit: { 
-                                                    opacity: 0, 
-                                                    scale: 0.6, 
-                                                    y: -20,
-                                                    transition: { duration: 0.2 }
-                                                }
-                                            }}
-                                        >
-                                            {icon(tech)}
-                                        </motion.div>
-                                    )
-                                })}
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-                    {filteredProjects[selectedProject].website && filteredProjects[selectedProject].github && (
-                        <AnimatePresence mode="wait">
-                            <motion.div 
-                                key={selectedProject}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
-                                className='flex justify-center items-center hovered w-1/3'
-                            >
-                                <a href={`https://${filteredProjects[selectedProject].github}`} className='hovered'>
-                                    <FontAwesomeIcon 
-                                    icon={faGithub} 
-                                    className='text-5xl text-devGrey hovered'
-                                    />
-                                </a>
-                            </motion.div>
-                        </AnimatePresence>
-                    )}
-                </div>
+                <div className='flex flex-row w-full justify-between items-start' style={{ width: '66.67%', margin: '0 auto' }}>
+                  <div className='flex flex-col items-start justify-start gap-4'>
+                      <AnimatePresence mode="wait">
+                          <motion.div
+                              key={selectedProject}
+                              initial="hidden"
+                              animate="visible"
+                              exit="exit"
+                              className='flex flex-row gap-4 justify-start items-center h-fit'
+                          >
+                              {filteredProjects[selectedProject].technologies.map((tech, index) => {
+                                  return (
+                                      <motion.div 
+                                          key={`${selectedProject}-${tech}-${index}`} 
+                                          className='flex justify-center items-center hovered'
+                                          variants={{
+                                              hidden: { opacity: 0, scale: 0.6, y: 20 },
+                                              visible: { 
+                                                  opacity: 1, 
+                                                  scale: 1, 
+                                                  y: 0,
+                                                  transition: { 
+                                                      delay: 0.1 + (index * 0.08),
+                                                      duration: 0.5,
+                                                      type: "spring",
+                                                      stiffness: 100
+                                                  }
+                                              },
+                                              exit: { 
+                                                  opacity: 0, 
+                                                  scale: 0.6, 
+                                                  y: -20,
+                                                  transition: { duration: 0.2 }
+                                              }
+                                          }}
+                                      >
+                                          {icon(tech)}
+                                      </motion.div>
+                                  )
+                              })}
+                          </motion.div>
+                      </AnimatePresence>
+                  </div>
+    {filteredProjects[selectedProject].website && filteredProjects[selectedProject].github && (
+        <AnimatePresence mode="wait">
+            <motion.div 
+                key={selectedProject}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
+                className='flex justify-center items-center hovered'
+            >
+                <a href={`https://${filteredProjects[selectedProject].github}`} className='hovered'>
+                    <FontAwesomeIcon 
+                        icon={faGithub} 
+                        className='text-5xl text-devGrey hovered'
+                    />
+                </a>
+            </motion.div>
+        </AnimatePresence>
+    )}
+</div>
             </div>
        </div>
       
