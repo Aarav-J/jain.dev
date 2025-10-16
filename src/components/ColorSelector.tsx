@@ -86,7 +86,7 @@ const ColorSelector: React.FC = () => {
   return (
     <div className="z-50">
       <motion.button
-        className="relative w-12 h-12 rounded-md flex items-center justify-center shadow-lg hover:shadow-xl"
+        className="relative w-12 h-12 rounded-md flex hovered items-center justify-center shadow-lg hover:shadow-xl"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}

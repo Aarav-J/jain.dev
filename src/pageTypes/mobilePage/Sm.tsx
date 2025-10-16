@@ -13,7 +13,7 @@ const MobilePage = () => {
     return (
         <div className={`w-full h-full flex flex-col`}>
             <Navbar show={show} setShow={setShow} refs={[LandingSection, AboutSection, SkillSection, ProjectSection]} />
-            <LandingPage headingRef={LandingSection} aboutRef={AboutSection} />
+            <LandingPage headingRef={LandingSection} projectRef={ProjectSection} />
             <ProjectsPage headingRef={ProjectSection} />
             <SkillsPage headingRef={SkillSection} />
             <AboutPage headingRef={AboutSection} />

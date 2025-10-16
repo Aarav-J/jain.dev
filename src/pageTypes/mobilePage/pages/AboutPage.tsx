@@ -14,7 +14,7 @@ const AboutPage: React.FC<SmSectionType> = ({ headingRef }) => {
                 <span className="font-semibold text-devPink text-3xl" >About</span>
                 <span className="text-white font-black text-7xl text-center typewriter">{word}</span>
                 <span className="text-devGrey font-normal text-3xl text-center w-11/12">I am Aarav, a Computer Engineering student at Purdue University. I am passionate about software development and solving technical challenges. I enjoy building web applications, coding in multiple languages, and working on innovative projects.</span>
-
+                
             </div>
         </div>
     )

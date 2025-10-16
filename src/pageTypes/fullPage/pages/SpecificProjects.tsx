@@ -38,7 +38,7 @@ const data: ProjectData[] = [
     { 
         name: "Bridge", 
         description: "My team and I built Bridge during a hackathon to create a platform that combats political echo chambers by pairing users with opposing views for structured, video-based debates. The app uses a full-stack setup with a Next.js + React frontend, a Node.js + Express + Socket.IO backend, Supabase for authentication and data storage, WebRTC for peer-to-peer video, and OpenAI GPT-4 for real-time fact-checking. The result is a technically robust system that manages matchmaking, debate phases, and AI-powered insights to foster respectful and fact-based political discussions.",
-        github: "https://github.com/Aarav-J/Bridge", 
+        github: "github.com/Aarav-J/Bridge", 
         website: "devpost.com/software/bridge-8xjdwu", 
         image: "bridge.jpg",
         technologies: ["react", "typescript", "tailwind", "openai", "socket", "node", "supabase"],
