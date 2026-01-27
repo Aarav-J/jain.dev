@@ -4,7 +4,7 @@ import { getRecentlyWatched, LetterboxdFilm } from '../utils';
 import LetterboxdIcon from './LetterboxdIcon';
 
 const Letterboxd = () => {
-  const username = 'aaravj'; // Your Letterboxd username
+  const username = 'aarav_j'; // Your Letterboxd username
   const [film, setFilm] = useState<LetterboxdFilm | null>(null)
   const [error, setError] = useState<boolean>(false)
   const returnStars = (rating: string) => {
