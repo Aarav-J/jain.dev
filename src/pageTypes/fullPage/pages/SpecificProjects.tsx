@@ -1,349 +1,316 @@
-import  {useState} from 'react';
-import Cursor from '../../../components/Cursor';
-import {faRightLong, faGlobe, faMobileAlt, faFlask, faLaptopCode } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon,} from '@fortawesome/react-fontawesome';
-import { faGithub, faJs, faNode, faReact, } from '@fortawesome/free-brands-svg-icons';
-import Navbar from '../../../components/Navbar';
-import ProjectPagination from '../../../components/projectsPagination/ProjectPagination';
-import { SiAxios, SiCplusplus, SiFirebase, SiFlask, SiMongodb, SiPython, SiSocketdotio, SiTailwindcss, SiTypescript, SiTensorflow, SiExpo, SiOverleaf, SiOpenai, SiSupabase } from 'react-icons/si';
-
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// import Data from "./Data"
-interface IconProps {
-    tech: string;
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMobileAlt, faFlask, faLaptopCode, faMicrochip, faXmark, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Navbar from '../../../components/Navbar';
+import Cursor from '../../../components/Cursor';
+import { projects, ProjectData } from '../../../data/projects';
+import { typeColor, typeLabel, techLabel } from '../../../data/projectUtils';
+
+type FilterType = 'all' | 'web' | 'mobile' | 'research' | 'systems';
+
+const typeIcon: Record<string, React.ReactNode> = {
+    web:      <FontAwesomeIcon icon={faLaptopCode} />,
+    mobile:   <FontAwesomeIcon icon={faMobileAlt} />,
+    research: <FontAwesomeIcon icon={faFlask} />,
+    systems:  <FontAwesomeIcon icon={faMicrochip} />,
 }
 
-interface ProjectData {
-  name: string;
-  description: string;
-  website: string | null;
-  github: string | null;
-  image: string;
-  technologies: string[];
-  type: 'web' | 'mobile' | 'research';
-}
-
-
-
-const data: ProjectData[] = [ 
-    { 
-        name: "Truth Decay", 
-        description: "Rapid improvements in large language models have unveiled a critical challenge in human-AI interaction: sycophancy. In this context, sycophancy refers to the tendency of models to excessively agree with or flatter users, often at the expense of factual accuracy. While previous studies have primarily analyzed this behavior in single-turn interactions, its persistence and evolution in multi-step conversations remain largely unexplored. We introduce TRUTH DECAY, a benchmark specifically designed to evaluate sycophancy in extended dialogues, where language models must navigate iterative user feedback, challenges, and persuasion. We prompt models to elicit four types of sycophantic biases. We then propose and test sycophancy reduction strategies, evaluating their effectiveness beyond single-step interactions.",
-        github: null, 
-        website: "arxiv.org/pdf/2503.11656", 
-        image: "research.png",
-        technologies: ["python",  "overleaf"],
-        type: "research"
-    },
-    { 
-        name: "Bridge", 
-        description: "My team and I built Bridge during a hackathon to create a platform that combats political echo chambers by pairing users with opposing views for structured, video-based debates. The app uses a full-stack setup with a Next.js + React frontend, a Node.js + Express + Socket.IO backend, Supabase for authentication and data storage, WebRTC for peer-to-peer video, and OpenAI GPT-4 for real-time fact-checking. The result is a technically robust system that manages matchmaking, debate phases, and AI-powered insights to foster respectful and fact-based political discussions.",
-        github: "github.com/Aarav-J/Bridge", 
-        website: "devpost.com/software/bridge-8xjdwu", 
-        image: "bridge.jpg",
-        technologies: ["react", "typescript", "tailwind", "openai", "socket", "node", "supabase"],
-        type: "web"
-    },
-    { 
-        name: "MarvelOracle", 
-        description: "A full-stack RAG (Retrieval-Augmented Generation) application that lets you chat with the Marvel Universe using AI. Ask questions about Marvel characters, storylines, and lore with context-aware responses powered by vector search and GPT-4. Marvel wiki pages were scraped using python and then embedded into a pinecone vector database. ", 
-        website: 'marveloracle.aaravj.xyz', 
-        github: "github.com/Aarav-J/marveloracle", 
-        image: "marveloracle.png",
-        technologies: ["react", "python", "js",  "tailwind", "openai"],
-        type: "web"
-    }, 
-    
-    {
-        name: "AaravSim", 
-        description: "Aaravsim is a full-stack stock market simulator and dashboard application. It allows users to simulate trading, view stock data, manage portfolios, and access market news, all in a modern web interface. Built with React for the frontend and Flask for the backend exposted through a REST API endpoint.", 
-        website: "aaravsim.aaravj.xyz", 
-        github: "github.com/Aarav-J/aaravsim",
-        image: "aaravsim.png",
-        technologies: ['react', 'js', 'python', 'supabase'], 
-        type: "web"
-
-    },
-     { 
-        name: "Stronger", 
-        description: "A comprehensive mobile fitness tracking application built for Android and iOS using React Native. The app monitors workouts, and progress with goals and detailed analytics. Push notifications help users stay motivated.", 
-        website: null, 
-        github: "github.com/Aarav-J/strong2.0", 
-        image: "strong.png",
-        technologies: ["react", "js", "python", "expo"],
-        type: "mobile"
-    },
-    { 
-        name: "AaravType", 
-        description: "A sophisticated typing test application designed to help users improve their typing speed and accuracy. The platform features customizable tests, detailed analytics to track progress over time. Built with React to display typing statistics.", 
-        website: "aaravtype.aaravj.xyz", 
-        github: "github.com/Aarav-J/aaravtypefrontend", 
-        image: "aaravtype.png",
-        technologies: ["react", "js", "tailwind", "node", "mongo"],
-        type: "web"
-    },
-   
-    
+const FILTERS: { type: FilterType; label: string }[] = [
+    { type: 'all',      label: 'All'      },
+    { type: 'web',      label: 'Web'      },
+    { type: 'systems',  label: 'Systems'  },
+    { type: 'mobile',   label: 'Mobile'   },
+    { type: 'research', label: 'Research' },
 ]
-const SpecificProjects = () => {
-   
-    const icon = (tech: IconProps['tech']): JSX.Element | null => { 
-        if(tech === "react") return <FontAwesomeIcon icon={faReact} className='text-5xl text-react'/>
-        if(tech === "node") return <FontAwesomeIcon icon={faNode} className='text-5xl text-node'/>
-        if(tech === "js") return <FontAwesomeIcon icon={faJs} className='text-5xl text-js'/>
-        if(tech === "socket") return <SiSocketdotio className='text-5xl text-white'/>
-        if(tech === "mongo") return <SiMongodb className='text-5xl text-mongo'/>
-        if(tech === "tailwind") return <SiTailwindcss className='text-5xl text-tailwind'/>
-        if(tech === "ts") return <SiTypescript className='text-5xl text-ts'/>
-        if(tech === "axios") return <SiAxios className='text-5xl text-axios'/>
-        if(tech === "python") return <SiPython className='text-5xl text-python'/>
-        if(tech === "flask") return <SiFlask className='text-5xl text-flask'/>
-        if(tech === "cplusplus") return <SiCplusplus className='text-5xl text-cplusplus'/>
-        if(tech === "firebase") return <SiFirebase className='text-5xl text-firebase'/>
-        if(tech === "typescript") return <SiTypescript className='text-5xl text-ts'/>
-        // if(tech === "android") return <FontAwesomeIcon icon={faAndroid} className='text-5xl text-android'/>
-        // if(tech === "ios") return <FontAwesomeIcon icon={faApple} className='text-5xl text-apple'/>
-        if(tech === "tensorflow") return <SiTensorflow className='text-5xl text-tensorflow'/>
-        if(tech === "supabase") return <SiSupabase className='text-5xl text-supabase'/>
-        if(tech === "openai") return <SiOpenai className='text-5xl text-openai'/>
-        if(tech === "expo") return <SiExpo className='text-5xl text-white'/>
-        if(tech === "overleaf") return <SiOverleaf className='text-5xl text-overleaf'/>
-        return null
-    }
-    
-    const [selectedProject, setSelectedProject] = useState(0)
-    const [projectType, setProjectType] = useState<'all' | 'web' | 'mobile' | 'research'>('all')
-    
-    const filteredProjects = projectType === 'all' 
-        ? data 
-        : data.filter(project => project.type === projectType)
-        
-    // Reset selected project when changing filter
-    const handleProjectTypeChange = (type: 'all' | 'web' | 'mobile' | 'research') => {
-        setProjectType(type);
-        setSelectedProject(0);
-    }
-  return (
+
+// ── Card ─────────────────────────────────────────────────────────────────────
+
+interface CardProps {
+    project: ProjectData;
+    index: number;
+    onExpand: (project: ProjectData, e: React.MouseEvent<HTMLDivElement>) => void;
+}
+
+const ProjectCard: React.FC<CardProps> = ({ project: p, index: i, onExpand }) => (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className='w-screen h-screen bg-background-primary items-center flex flex-col justify-start'
+        layout
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.25, delay: i * 0.03 }}
+        onClick={(e) => onExpand(p, e)}
+        className="group relative overflow-hidden rounded-xl border border-white/8 bg-white/[0.02] flex flex-col hovered"
+        whileHover={{ y: -3, borderColor: 'rgba(197,23,241,0.28)' }}
     >
-        <Navbar/>
-        <div className='mt-20 mb-6 flex flex-row justify-center items-center gap-6'>
-          <motion.button 
-            onClick={() => handleProjectTypeChange('all')} 
-            className={`px-6 py-2 rounded-md ${projectType === 'all' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'}`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            All Projects
-          </motion.button>
-          <motion.button 
-            onClick={() => handleProjectTypeChange('web')} 
-            className={`px-6 py-2 rounded-md ${projectType === 'web' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'} flex items-center gap-2`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <FontAwesomeIcon icon={faLaptopCode} /> Web Projects
-          </motion.button>
-          <motion.button 
-            onClick={() => handleProjectTypeChange('mobile')} 
-            className={`px-6 py-2 rounded-md ${projectType === 'mobile' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'} flex items-center gap-2`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <FontAwesomeIcon icon={faMobileAlt} /> Mobile Apps
-          </motion.button>
-          <motion.button 
-            onClick={() => handleProjectTypeChange('research')} 
-            className={`px-6 py-2 rounded-md ${projectType === 'research' ? 'bg-devPink text-white' : 'bg-transparent text-devGrey border border-devGrey'} flex items-center gap-2`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <FontAwesomeIcon icon={faFlask} /> Research
-          </motion.button>
+        {/* Image */}
+        <div className="relative h-44 overflow-hidden bg-white/[0.03] flex-shrink-0">
+            <img
+                src={`/${p.image}`}
+                alt={p.name}
+                className="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:opacity-62 transition-opacity duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background-primary/90" />
+            <span className={`absolute top-3 left-3 text-[10px] font-mono px-2 py-0.5 rounded border flex items-center gap-1.5 ${typeColor[p.type]}`}>
+                {typeIcon[p.type]}
+                {typeLabel[p.type]}
+            </span>
         </div>
 
-       <div className='flex flex-row justify-center items-center gap-6 h-full w-full'>
-         {/* right side */}
-            <div className='flex flex-col w-1/2 h-full justify-center items-start pl-24 gap-6 '>
-                <div className='flex flex-col gap-2'>
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                      key={selectedProject}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      className='flex items-center gap-3'
-                    >
-                      <span className='text-7xl text-white font-display font-bold tracking-wide'>
-                        {filteredProjects[selectedProject].name}
-                      </span>
-                      <div className={`px-3 py-2 rounded-md flex items-center gap-2 ${
-                        filteredProjects[selectedProject].type === 'web' ? 'bg-blue-500/20 text-blue-300' : 
-                        filteredProjects[selectedProject].type === 'mobile' ? 'bg-green-500/20 text-green-300' : 
-                        'bg-purple-500/20 text-purple-300'
-                      }`}>
-                        <FontAwesomeIcon icon={
-                          filteredProjects[selectedProject].type === 'web' ? faLaptopCode :
-                          filteredProjects[selectedProject].type === 'mobile' ? faMobileAlt :
-                          faFlask
-                        } />
-                        <span className='text-sm font-medium'>
-                          {filteredProjects[selectedProject].type === 'web' ? 'Web Project' : 
-                           filteredProjects[selectedProject].type === 'mobile' ? 'Mobile App' : 
-                           'Research'}
-                        </span>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-                
-                <div className='flex flex-col gap-3'>
-                  <span className='text-3xl text-devPink font-display font-semibold'>Description</span>
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={selectedProject}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
-                      className='w-5/6 text-devGrey font-display font-light'
-                    >
-                      {filteredProjects[selectedProject].description}
-                    </motion.span>
-                  </AnimatePresence>
-                </div>
+        {/* Content */}
+        <div className="flex flex-col flex-1 p-5 gap-3">
+            <h3 className="font-display font-bold text-xl text-white tracking-tight leading-tight">
+                {p.name}
+            </h3>
+            <p className="text-devGrey text-sm font-display leading-relaxed line-clamp-2 flex-1">
+                {p.description}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+                {p.technologies.slice(0, 4).map(t => (
+                    <span key={t} className="text-[10px] font-mono text-devGrey/60 px-2 py-0.5 bg-white/5 rounded border border-white/8">
+                        {techLabel[t] ?? t}
+                    </span>
+                ))}
+                {p.technologies.length > 4 && (
+                    <span className="text-[10px] font-mono text-devGrey/40 px-2 py-0.5">
+                        +{p.technologies.length - 4}
+                    </span>
+                )}
             </div>
-            {/* Left side */}
-            <div className='flex flex-col w-1/2 h-full justify-center items-center gap-9'>
-                <div className='flex justify-center items-center relative w-full h-auto overflow-hidden'>
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={selectedProject} 
-                        initial={{ opacity: 0, x: 50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -50 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="w-full flex justify-center"
-                      >
-                        <img 
-                          src={`/${filteredProjects[selectedProject].image}`} 
-                          alt={filteredProjects[selectedProject].name}
-                          className={`rounded-md border-solid border-2 border-devPurple ${
-                             'w-2/3 aspect-auto' 
-                          }`}
-                        />
-                        <div className='goto-panel rounded-b-md py-3 px-6 absolute bottom-0 border-solid border-l-2 border-b-2 border-r-2 border-devPurple'
-                          style={{ 
-                            width: '66.67%', 
-                            backgroundColor: "color-mix(in srgb, var(--secondary-color) 90%, transparent)"}}>
-                            <a href={`https://${filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}`} className='hovered'>
-                            <div className='flex flex-row justify-between w-full'>
-                                <div className='flex flex-row gap-3 items-center justify-center'>
-                                    <FontAwesomeIcon icon={filteredProjects[selectedProject].website ? faGlobe : faGithub} className='text-white'/>
-                                    <span className='text-white'>{filteredProjects[selectedProject].website ? filteredProjects[selectedProject].website : filteredProjects[selectedProject].github}</span>
-                                </div>
-                                <div>
-                                    <FontAwesomeIcon icon={faRightLong} className='text-white w-9'/>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                </div>
-              <div className='flex flex-row w-full justify-between items-start' style={{ width: '66.67%', margin: '0 auto' }}>
-  <div className='flex flex-col items-start justify-start gap-4' style={{ width: '75%' }}>
-      <AnimatePresence mode="wait">
-          <motion.div
-              key={selectedProject}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className='flex flex-row gap-2 sm:gap-3 md:gap-4 lg:gap-4 justify-start items-center h-fit flex-wrap'
-              style={{ width: '100%' }}
-          >
-              {filteredProjects[selectedProject].technologies.map((tech, index) => {
-                  return (
-                      <motion.div 
-                          key={`${selectedProject}-${tech}-${index}`} 
-                          className='flex justify-center items-center hovered'
-                          variants={{
-                              hidden: { opacity: 0, scale: 0.6, y: 20 },
-                              visible: { 
-                                  opacity: 1, 
-                                  scale: 1, 
-                                  y: 0,
-                                  transition: { 
-                                      delay: 0.1 + (index * 0.08),
-                                      duration: 0.5,
-                                      type: "spring",
-                                      stiffness: 100
-                                  }
-                              },
-                              exit: { 
-                                  opacity: 0, 
-                                  scale: 0.6, 
-                                  y: -20,
-                                  transition: { duration: 0.2 }
-                              }
-                          }}
-                      >
-                          <div className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl'>
-                              {icon(tech)}
-                          </div>
-                      </motion.div>
-                  )
-              })}
-          </motion.div>
-      </AnimatePresence>
-  </div>
-  {filteredProjects[selectedProject].website && filteredProjects[selectedProject].github && (
-      <AnimatePresence mode="wait">
-          <motion.div 
-              key={selectedProject}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
-              className='flex justify-center items-center hovered'
-          >
-              <a href={`https://${filteredProjects[selectedProject].github}`} className='hovered'>
-                  <FontAwesomeIcon 
-                      icon={faGithub} 
-                      className='text-3xl sm:text-4xl md:text-4xl lg:text-5xl text-devGrey hovered'
-                  />
-              </a>
-          </motion.div>
-      </AnimatePresence>
-  )}
-</div>
-            </div>
-       </div>
-      
-      <div className='mb-8'>
-        <ProjectPagination 
-          activeProject={selectedProject} 
-          setActiveProject={setSelectedProject} 
-          projectCount={filteredProjects.length}
-        />
-      </div>
-      
-      <Cursor/>
+        </div>
     </motion.div>
-  );
-};
+)
+
+// ── Expanded overlay ──────────────────────────────────────────────────────────
+
+interface ExpandedProps {
+    project: ProjectData;
+    origin: { x: number; y: number };
+    onClose: () => void;
+}
+
+const ExpandedOverlay: React.FC<ExpandedProps> = ({ project: p, origin, onClose }) => (
+    <>
+        {/* Backdrop */}
+        <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 bg-background-primary/70 backdrop-blur-[3px] z-20"
+            onClick={onClose}
+        />
+
+        {/* Centered container — pointer-events-none so backdrop click-through works */}
+        <div className="fixed inset-0 z-30 flex items-center justify-center pointer-events-none px-12">
+            <motion.div
+                key={p.name}
+                initial={{ scale: 0.18, x: origin.x, y: origin.y, opacity: 0 }}
+                animate={{ scale: 1,    x: 0,        y: 0,        opacity: 1 }}
+                exit={{    scale: 0.18, x: origin.x, y: origin.y, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+                className="w-full max-w-4xl bg-[#090f16] rounded-2xl border border-white/12 shadow-[0_32px_80px_rgba(0,0,0,0.6)] overflow-hidden flex flex-row pointer-events-auto"
+                style={{ maxHeight: '78vh' }}
+            >
+                {/* Left — image */}
+                <div className="relative w-[42%] flex-shrink-0 overflow-hidden">
+                    <img
+                        src={`/${p.image}`}
+                        alt={p.name}
+                        className="w-full h-full object-cover opacity-72"
+                    />
+                    {/* Right-edge fade so image bleeds into content */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#090f16]/70" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090f16]/60 via-transparent to-transparent" />
+
+                    {/* Type badge */}
+                    <span className={`absolute top-5 left-5 text-[10px] font-mono px-2 py-0.5 rounded border flex items-center gap-1.5 ${typeColor[p.type]}`}>
+                        {typeIcon[p.type]}
+                        {typeLabel[p.type]}
+                    </span>
+                </div>
+
+                {/* Right — content */}
+                <div className="flex-1 flex flex-col px-8 py-7 gap-5 overflow-y-auto min-h-0 relative">
+
+                    {/* Close */}
+                    <button
+                        onClick={onClose}
+                        className="absolute top-5 right-5 w-7 h-7 rounded-full bg-white/8 hover:bg-white/16 border border-white/10 flex items-center justify-center transition-colors hovered"
+                    >
+                        <FontAwesomeIcon icon={faXmark} className="text-white/60 text-[11px]" />
+                    </button>
+
+                    {/* Name */}
+                    <h2 className="font-display font-bold text-[2rem] text-white tracking-tight leading-tight pr-10">
+                        {p.name}
+                    </h2>
+
+                    {/* Description */}
+                    <div className="flex flex-col gap-1.5">
+                        <span className="font-mono text-[10px] text-devPink tracking-[0.2em] uppercase">About</span>
+                        <p className="text-devGrey text-sm font-display leading-relaxed">
+                            {p.description}
+                        </p>
+                    </div>
+
+                    {/* Tech */}
+                    <div className="flex flex-col gap-1.5">
+                        <span className="font-mono text-[10px] text-devPink tracking-[0.2em] uppercase">Technologies</span>
+                        <div className="flex flex-wrap gap-2">
+                            {p.technologies.map(t => (
+                                <span key={t} className="text-xs font-mono text-devGrey/80 px-2.5 py-1 bg-white/5 rounded-md border border-white/10">
+                                    {techLabel[t] ?? t}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Links — always at bottom */}
+                    <div className="flex gap-3 mt-auto pt-4 border-t border-white/8">
+                        {p.github && (
+                            <a
+                                href={`https://${p.github}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-4 py-2 border border-white/15 rounded-lg text-sm font-mono text-devGrey hover:text-white hover:border-white/30 transition-colors hovered"
+                            >
+                                <FontAwesomeIcon icon={faGithub} />
+                                View Code
+                            </a>
+                        )}
+                        {p.website && (
+                            <a
+                                href={`https://${p.website}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 px-4 py-2 bg-devPink text-white rounded-lg text-sm font-mono hover:bg-devPurple transition-colors hovered"
+                            >
+                                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                                Live Demo
+                            </a>
+                        )}
+                    </div>
+
+                </div>
+            </motion.div>
+        </div>
+    </>
+)
+
+// ── Page ─────────────────────────────────────────────────────────────────────
+
+const SpecificProjects = () => {
+    const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+    const [expanded, setExpanded]         = useState<ProjectData | null>(null)
+    const [origin, setOrigin]             = useState({ x: 0, y: 0 })
+
+    const filtered = activeFilter === 'all'
+        ? projects
+        : projects.filter(p => p.type === activeFilter)
+
+    // ESC to close
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setExpanded(null) }
+        window.addEventListener('keydown', onKey)
+        return () => window.removeEventListener('keydown', onKey)
+    }, [])
+
+    // Close if filtered project disappears
+    useEffect(() => {
+        if (expanded && !filtered.find(p => p.name === expanded.name)) setExpanded(null)
+    }, [activeFilter])
+
+    const handleExpand = (project: ProjectData, e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        setOrigin({
+            x: (rect.left + rect.width  / 2) - window.innerWidth  / 2,
+            y: (rect.top  + rect.height / 2) - window.innerHeight / 2,
+        })
+        setExpanded(project)
+    }
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="w-screen min-h-screen bg-background-primary flex flex-col"
+        >
+            <Navbar />
+
+            <div className="pt-24 pb-16 px-16 flex flex-col gap-8 max-w-7xl w-full mx-auto">
+
+                {/* Header */}
+                <div className="flex flex-row justify-between items-end">
+                    <div className="flex flex-col gap-1">
+                        <span className="font-mono text-xs text-devPink tracking-[0.2em] uppercase">All Work</span>
+                        <h1 className="font-display font-black text-5xl text-white tracking-tight">Projects</h1>
+                    </div>
+                    <span className="font-mono text-xs text-devGrey/40 tracking-widest">
+                        {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+                    </span>
+                </div>
+
+                {/* Filter bar */}
+                <div className="flex flex-row gap-2">
+                    {FILTERS.map(({ type, label }) => (
+                        <motion.button
+                            key={type}
+                            onClick={() => setActiveFilter(type)}
+                            className={`px-4 py-1.5 rounded-md font-mono text-xs tracking-[0.08em] transition-colors ${
+                                activeFilter === type
+                                    ? 'bg-devPink text-white'
+                                    : 'bg-transparent text-devGrey border border-white/10 hover:border-white/30'
+                            }`}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                        >
+                            {label}
+                            {type !== 'all' && (
+                                <span className="ml-1.5 opacity-50">
+                                    {projects.filter(p => p.type === type).length}
+                                </span>
+                            )}
+                        </motion.button>
+                    ))}
+                </div>
+
+                {/* Grid */}
+                <motion.div layout className="grid grid-cols-3 gap-5">
+                    <AnimatePresence mode="popLayout">
+                        {filtered.map((p, i) => (
+                            <ProjectCard
+                                key={p.name}
+                                project={p}
+                                index={i}
+                                onExpand={handleExpand}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
+
+            </div>
+
+            {/* Zoom overlay */}
+            <AnimatePresence>
+                {expanded && (
+                    <ExpandedOverlay
+                        key={expanded.name}
+                        project={expanded}
+                        origin={origin}
+                        onClose={() => setExpanded(null)}
+                    />
+                )}
+            </AnimatePresence>
+
+            <Cursor />
+        </motion.div>
+    )
+}
 
 export default SpecificProjects;
-
-//#8884FF
-//#C4CBCA

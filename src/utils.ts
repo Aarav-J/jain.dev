@@ -14,9 +14,7 @@ export interface LetterboxdFilm {
 
 }
 
-
-
-export async function getRecentlyWatched(): Promise<LetterboxdFilm | null> { 
+export async function getRecentlyWatched(): Promise<LetterboxdFilm | null> {
     try { 
         const response = await fetch("https://m7tnsnh3sk.execute-api.us-east-1.amazonaws.com/corsstage");
         

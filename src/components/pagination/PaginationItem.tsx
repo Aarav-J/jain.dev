@@ -1,5 +1,3 @@
-
-
 type PaginationItemProps = {
     pageNumber: string
     refNumber: React.RefObject<HTMLDivElement>
@@ -9,13 +7,22 @@ type PaginationItemProps = {
 }
 
 const PaginationItem: React.FC<PaginationItemProps> = ({ pageNumber, refNumber, scroll, activeNumber }) => {
+    const isActive = activeNumber === parseInt(pageNumber)
     return (
-        <div className={` border-l-[thick] border-solid ${activeNumber === parseInt(pageNumber) ? "pagination-item text-white font-black border-white" : "text-white border-devGrey"} hover:text-devPink hover:border-devPink`}>
-            <button onClick={() => { scroll(refNumber); }} className="hovered text-2xl border-none px-4">
-                {pageNumber}
-            </button>
-        </div>
-    );
+        <button
+            onClick={() => scroll(refNumber)}
+            className="hovered group flex items-center justify-center w-5 h-5"
+            aria-label={`Go to section ${pageNumber}`}
+        >
+            <span
+                className={`block rounded-full transition-all duration-300 ${
+                    isActive
+                        ? 'w-1.5 h-1.5 bg-devPink'
+                        : 'w-1 h-1 bg-devGrey/40 group-hover:bg-devGrey/80'
+                }`}
+            />
+        </button>
+    )
 }
 
 export default PaginationItem

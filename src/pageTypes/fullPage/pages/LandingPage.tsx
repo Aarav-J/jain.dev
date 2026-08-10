@@ -1,104 +1,101 @@
-import "../../../components/typewriter.scss"
-import "../../../components/ButtonFill.css"
-import useTypedWords from "../../../hooks/useTypedWords"
 import { motion } from "framer-motion"
-// import <FontAwesomeIcon "@fortawesome/react-fontawesome"
-// import { faFile } from "react-icons/fa"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFile } from "@fortawesome/free-solid-svg-icons"
-type landingProps = {
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
+import { person, hero } from "../../../data/content"
+import HeroScene from "../../../components/HeroScene"
+
+type LandingProps = {
     headingRef: React.RefObject<HTMLHeadingElement>;
     learnMoreRef: React.RefObject<HTMLDivElement>;
     scroll: (section: React.RefObject<HTMLDivElement>) => void;
 }
 
-
-
-
-const words = ["creating", "learning", "coding", "playing"]
-
-const LandingPage: React.FC<landingProps> = ({ headingRef, learnMoreRef, scroll }) => {
-
-    const word = useTypedWords(words)
+const LandingPage: React.FC<LandingProps> = ({ headingRef, learnMoreRef, scroll }) => {
     return (
-        <motion.div 
-            className={`section w-screen h-screen bg-background-primary flex items-center justify-center`}
+        <motion.div
+            className="section w-screen min-h-[100dvh] bg-background-primary flex items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
         >
-            <div className={`heading flex items-center w-full flex-col justify-center`}>
-                <motion.span 
-                    className="font-semibold text-devPink text-3xl" 
-                    ref={headingRef}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                    Who Am I?
-                </motion.span>
-                
-                <motion.span 
-                    className="text-white font-black text-7xl text-center"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                        duration: 0.8, 
-                        delay: 0.5,
-                        type: "spring",
-                        stiffness: 100
-                    }}
-                >
-                    I'm Aarav Jain
-                </motion.span>
-                
-                <motion.span 
-                    className="text-devGrey font-normal text-7xl lg:text-left text-center"
+            <div className="flex flex-row w-full items-center px-24 gap-8">
+
+                {/* Left — content */}
+                <div className="flex flex-col gap-7 w-3/5">
+                    <motion.span
+                        className="font-mono text-xs text-devGrey tracking-[0.22em] uppercase"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                        {hero.eyebrow}
+                    </motion.span>
+
+                    <motion.h1
+                        ref={headingRef}
+                        className="font-display font-black text-[7.5rem] leading-[0.92] tracking-tighter text-white"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                        {person.displayName.split('\n').map((line, i) => (
+                            <span key={i}>{line}{i < person.displayName.split('\n').length - 1 && <br />}</span>
+                        ))}
+                    </motion.h1>
+
+                    <motion.p
+                        className="text-devGrey text-lg font-display font-light max-w-xs leading-relaxed"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.35 }}
+                    >
+                        {hero.pitch}
+                    </motion.p>
+
+                    <motion.div
+                        className="flex flex-row gap-3 mt-1"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
+                    >
+                        <motion.button
+                            onClick={() => scroll(learnMoreRef)}
+                            className="px-6 py-2.5 bg-devPink text-white font-display font-semibold text-sm rounded-md hovered"
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                            View Projects
+                        </motion.button>
+
+                        <motion.a
+                            href={person.resume}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-2.5 border border-white/20 text-devGrey font-display font-semibold text-sm rounded-md hovered flex items-center gap-2"
+                            whileHover={{ scale: 1.03, borderColor: "rgba(255,255,255,0.4)" }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                        >
+                            Resume
+                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-xs" />
+                        </motion.a>
+                    </motion.div>
+                </div>
+
+                {/* Right — 3D scene, contained */}
+                <motion.div
+                    className="flex-1 h-[68vh] max-h-[560px] min-h-[380px] pr-6"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 1.0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
                 >
-                    Someone who enjoys <span className="typewriter">{word}</span>
-                </motion.span>
-                <div className="flex flex-row w-full justify-center gap-6">
-                    
-                    <motion.button
-                        className="mt-6 inline-flex items-center gap-3 px-6 h-12 rounded-2xl text-lg font-semibold text-white shadow-md bg-gradient-to-r from-devPink to-devPurple"
-                        onClick={() => scroll(learnMoreRef)}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(0,0,0,0.25)" }}
-                        whileTap={{ scale: 0.98 }}
-                        transition={{ duration: 0.45, type: "spring", stiffness: 120 }}
-                    >
-                        See my Projects!
-                    </motion.button>
+                    <HeroScene />
+                </motion.div>
 
-                    {/* Secondary: Download Resume (outlined) */}
-                    <motion.a
-                        href="/Aarav_Jain_Resume.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Open Resume PDF in new tab"
-                        className="mt-6 inline-flex items-center gap-3 px-4 h-12 rounded-2xl text-lg font-semibold text-white border-2 border-devPurple bg-transparent"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        whileHover={{
-                            scale: 1.02,
-                            backgroundColor: "rgba(148,23,222,0.08)",
-                            borderColor: "var(--secondary-color, #9417DE)"
-                        }}
-                        whileTap={{ scale: 0.98 }}
-                        transition={{ duration: 0.35, type: "tween" }}
-                    >
-                        <FontAwesomeIcon icon={faFile} />
-                        <span>See my Resume!</span>
-                    </motion.a>
-                </div>
             </div>
         </motion.div>
     )
-
 }
 
 export default LandingPage

@@ -1,7 +1,7 @@
 @use 'sass:color';
 
 :root {
-  --color-cursor: 148, 23, 222;
+  --color-cursor: 197, 23, 241;
   --cursor-outline-shade: 0.3;
   --cursor-size: 10px;
   --cursor-outline-size: 12px;
@@ -39,12 +39,12 @@
 #cursor-dot {
   width: var(--cursor-size);
   height: var(--cursor-size);
-  background-color: var(--primary-color);
+  background-color: #C517F1;
 }
 
 #cursor-dot-outline {
   width: var(--cursor-outline-size);
   height: var(--cursor-outline-size);
   // background-color: var(--primary-color); 
-background-color: color-mix(in srgb, var(--primary-color) 20%, transparent);
+  background-color: rgba(197, 23, 241, 0.2);
 }
