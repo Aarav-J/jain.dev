@@ -83,7 +83,7 @@ const SpecificProjectsSm = () => {
                             {/* Image area */}
                             <div className="relative h-36 overflow-hidden bg-white/[0.03] flex-shrink-0">
                                 <img
-                                    src={`/${p.image}`}
+                                    src={`/${p.images[0]}`}
                                     alt={p.name}
                                     className="absolute inset-0 w-full h-full object-cover opacity-45"
                                 />

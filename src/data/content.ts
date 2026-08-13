@@ -35,7 +35,9 @@ export const experience = [
     company: "Assured Guaranty",
     role: "Software Engineering Intern",
     location: "New York, NY",
-    period: "Feb 2026 – Aug 2026",
+    period: "Feb 2026 — Aug 2026",
+    type: "internship" as const,
+    tech: ["AWS Textract", "AWS Bedrock", "Snowflake", "Python", "LightGBM"],
     bullets: [
       "Built an automated credit memo generation pipeline using AWS Textract, Bedrock, and Snowflake — reducing analyst time per credit by 70%.",
       "Developed a CUSIP similarity engine using weighted K-Nearest Neighbors and LightGBM leaf embeddings.",
@@ -45,7 +47,9 @@ export const experience = [
     company: "Purdue Embedded Systems Club",
     role: "Member",
     location: "West Lafayette, IN",
-    period: "Sep 2025 – Present",
+    period: "Sep 2025 — Present",
+    type: "club" as const,
+    tech: ["Zephyr RTOS", "C", "FreeRTOS", "I²C"],
     bullets: [
       "Developing a Hardware-in-the-Loop (HiL) system with multi-threaded architecture managing flight control, hover, and landing threads to validate drone firmware safely.",
       "Engineering device drivers in Zephyr RTOS for IMU and LiDAR sensors over I2C.",
@@ -55,7 +59,9 @@ export const experience = [
     company: "Purdue IDEAS Research Lab",
     role: "Undergraduate Researcher",
     location: "West Lafayette, IN",
-    period: "Oct 2025 – Present",
+    period: "Oct 2025 — Present",
+    type: "research" as const,
+    tech: ["PyTorch", "Python", "Unity", "ROS 2", "LLMs", "VLMs"],
     bullets: [
       "Developing an autonomous UAV-UGV collaboration system using LLMs, VLMs, and computer vision for navigation in unstructured environments.",
       "Building a Unity simulation perception pipeline feeding a PyTorch VLM to generate a structured 3D object map.",
@@ -65,7 +71,9 @@ export const experience = [
     company: "Algoverse",
     role: "Machine Learning Researcher",
     location: "Remote",
-    period: "Aug 2024 – May 2025",
+    period: "Aug 2024 — May 2025",
+    type: "research" as const,
+    tech: ["Python", "GPT-4", "LaTeX"],
     bullets: [
       "Developed a novel evaluation framework quantifying sycophantic behavior in multi-turn LLM conversations — finding a 47% accuracy decline over extended interactions.",
       "Co-authored the Truth Decay paper, published at NAACL 2025 Student Research Workshop.",

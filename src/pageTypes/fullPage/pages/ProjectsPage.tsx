@@ -72,7 +72,7 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
                         onClick={() => navigate('/projects')}
                     >
                         <img
-                            src={`/${featured[0].project.image}`}
+                            src={`/${featured[0].project.images[0]}`}
                             alt={featured[0].project.name}
                             className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-38 transition-opacity duration-500"
                         />
@@ -115,7 +115,7 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
                             onClick={() => navigate('/projects')}
                         >
                             <img
-                                src={`/${entry.project.image}`}
+                                src={`/${entry.project.images[0]}`}
                                 alt={entry.project.name}
                                 className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:opacity-28 transition-opacity duration-500"
                             />

@@ -48,7 +48,7 @@ const ProjectsPage: React.FC<SmSectionType> = ({ headingRef }) => {
                         {/* Slim image strip */}
                         <div className="relative h-24 overflow-hidden bg-white/[0.03]">
                             <img
-                                src={`/${project.image}`}
+                                src={`/${project.images[0]}`}
                                 alt={project.name}
                                 className="absolute inset-0 w-full h-full object-cover opacity-40"
                             />

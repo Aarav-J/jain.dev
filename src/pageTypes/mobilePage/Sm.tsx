@@ -4,22 +4,27 @@ import ProjectsPage from "./pages/ProjectsPage";
 import SkillsPage from "./pages/SkillsPage";
 import { useRef, useState } from "react";
 import Navbar from "./components/Navbar";
+
 const MobilePage = () => {
     const [show, setShow] = useState(false);
     const LandingSection = useRef<HTMLDivElement>(null);
-    const AboutSection = useRef<HTMLDivElement>(null);
-    const SkillSection = useRef<HTMLDivElement>(null);
     const ProjectSection = useRef<HTMLDivElement>(null);
+    const SkillSection   = useRef<HTMLDivElement>(null);
+    const AboutSection   = useRef<HTMLDivElement>(null);
+
     return (
-        <div className={`w-full h-full flex flex-col`}>
-            <Navbar show={show} setShow={setShow} refs={[LandingSection, AboutSection, SkillSection, ProjectSection]} />
+        <div className="w-full h-full flex flex-col">
+            <Navbar
+                show={show}
+                setShow={setShow}
+                refs={[LandingSection, ProjectSection, SkillSection, AboutSection]}
+            />
             <LandingPage headingRef={LandingSection} projectRef={ProjectSection} />
             <ProjectsPage headingRef={ProjectSection} />
             <SkillsPage headingRef={SkillSection} />
             <AboutPage headingRef={AboutSection} />
-            
         </div>
     )
 }
 
-export default MobilePage; 
+export default MobilePage;

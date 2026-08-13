@@ -21,9 +21,14 @@ const Spotify = () => {
     })
 
     useEffect(() => {
-        getNowPlayingItem(refresh_token).then((data) => {
-            if (data !== false) setResult(data)
-        })
+        const fetch = () => {
+            getNowPlayingItem(refresh_token).then((data) => {
+                if (data !== false) setResult(data)
+            })
+        }
+        fetch()
+        const interval = setInterval(fetch, 60 * 1000)
+        return () => clearInterval(interval)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
