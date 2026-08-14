@@ -17,7 +17,7 @@ export const person = {
 
 export const hero = {
   eyebrow: "ce @ purdue · firmware · full-stack",
-  pitch: "I build things for the web and close to the metal.",
+  // pitch: "I build things for the web and close to the metal.",
 }
 
 export const about = {

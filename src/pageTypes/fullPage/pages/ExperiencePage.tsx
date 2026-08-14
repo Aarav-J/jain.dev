@@ -21,7 +21,7 @@ const ExperiencePage: React.FC<SectionProps> = ({ headingRef }) => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.1 }}
         >
-            <div className="w-full max-w-5xl px-20 mx-auto flex flex-col gap-10 py-20">
+            <div className="w-full max-w-7xl mx-auto px-20 flex flex-col gap-10 py-20">
 
                 {/* Section heading */}
                 <div>

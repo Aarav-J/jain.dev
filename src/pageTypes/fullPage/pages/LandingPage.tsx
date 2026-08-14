@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { person, hero } from "../../../data/content"
-import HeroScene from "../../../components/HeroScene"
+import AsciiObject from "../../../components/AsciiObject"
 
 type LandingProps = {
     headingRef: React.RefObject<HTMLHeadingElement>;
@@ -18,10 +18,10 @@ const LandingPage: React.FC<LandingProps> = ({ headingRef, learnMoreRef, scroll 
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
-            <div className="flex flex-row w-full items-center px-24 gap-8">
+            <div className="flex flex-row w-full items-stretch justify-between px-20">
 
                 {/* Left — content */}
-                <div className="flex flex-col gap-7 w-3/5">
+                <div className="flex flex-col gap-6 shrink-0">
                     <motion.span
                         className="font-mono text-xs text-devGrey tracking-[0.22em] uppercase"
                         initial={{ opacity: 0, y: -10 }}
@@ -43,14 +43,14 @@ const LandingPage: React.FC<LandingProps> = ({ headingRef, learnMoreRef, scroll 
                         ))}
                     </motion.h1>
 
-                    <motion.p
+                    {/* <motion.p
                         className="text-devGrey text-lg font-display font-light max-w-xs leading-relaxed"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.35 }}
                     >
                         {hero.pitch}
-                    </motion.p>
+                    </motion.p> */}
 
                     <motion.div
                         className="flex flex-row gap-3 mt-1"
@@ -83,14 +83,34 @@ const LandingPage: React.FC<LandingProps> = ({ headingRef, learnMoreRef, scroll 
                     </motion.div>
                 </div>
 
-                {/* Right — 3D scene, contained */}
+                {/* Right — ASCII duck */}
                 <motion.div
-                    className="flex-1 h-[68vh] max-h-[560px] min-h-[380px] pr-6"
+                    className="w-[560px] shrink-0"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                 >
-                    <HeroScene />
+                    <AsciiObject
+                        src="/duck/scene.gltf"
+                        colored={false}
+                        color="#C517F1"
+                        highlight="#C517F1"
+                        background=""
+                        cellSize={9}
+                        charset="@#*+=−:·. "
+                        edgeContrast={4}
+                        contrast={1.8}
+                        autoRotate
+                        autoRotateSpeed={1.2}
+                        orbit
+                        zoom={false}
+                        floatIntensity={1.2}
+                        rotationIntensity={0.6}
+                        scale={5.5}
+                        xOffset={-0.3}
+                        cameraDistance={6.2}
+                        className="w-full h-full"
+                    />
                 </motion.div>
 
             </div>

@@ -40,13 +40,13 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
 
     return (
         <motion.div
-            className="section w-screen min-h-[100dvh] bg-background-primary flex items-center justify-center"
+            className="section w-screen min-h-[100dvh] bg-background-primary flex items-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, amount: 0.2 }}
         >
-            <div className="flex flex-col gap-8 w-full max-w-5xl px-20">
+            <div className="flex flex-col gap-8 w-full max-w-7xl mx-auto px-20">
 
                 {/* Header — no CTA here, it lives below the grid */}
                 <div className="flex flex-col gap-1">

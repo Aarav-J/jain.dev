@@ -361,7 +361,7 @@ const SpecificProjects = () => {
         >
             <Navbar />
 
-            <div className="pt-24 pb-16 px-16 flex flex-col gap-8 max-w-7xl w-full mx-auto">
+            <div className="pt-24 pb-16 px-20 flex flex-col gap-8 max-w-7xl w-full mx-auto">
 
                 {/* Header */}
                 <div className="flex flex-row justify-between items-end">

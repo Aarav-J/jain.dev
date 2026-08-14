@@ -88,7 +88,7 @@ const AboutPage: React.FC<SectionProps> = ({ headingRef }) => {
 
                     {/* Links */}
                     <motion.div
-                        className="flex flex-row gap-6 justify-center"
+                        className="flex flex-row gap-6 justify-start"
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 0.4, delay: 0.32 }}
@@ -111,7 +111,7 @@ const AboutPage: React.FC<SectionProps> = ({ headingRef }) => {
                 </div>
 
                 {/* ── Right: Experience ──────────────────────────────────── */}
-                <div className="flex-1 flex flex-col gap-5 pt-1">
+                <div className="flex-1 flex flex-col gap-5 pt-16">
 
                     <span className="font-mono text-xs text-devPink tracking-[0.2em] uppercase">
                         Background
