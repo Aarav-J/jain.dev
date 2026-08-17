@@ -33,7 +33,7 @@ const LandingPage: React.FC<LandingProps> = ({ headingRef, learnMoreRef, scroll 
 
                     <motion.h1
                         ref={headingRef}
-                        className="font-display font-black text-[7.5rem] leading-[0.92] tracking-tighter text-white"
+                        className="font-display font-black text-[10rem] leading-[0.88] tracking-tighter text-white"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
@@ -83,32 +83,36 @@ const LandingPage: React.FC<LandingProps> = ({ headingRef, learnMoreRef, scroll 
                     </motion.div>
                 </div>
 
-                {/* Right — ASCII duck */}
+                {/* Right — ASCII goat */}
                 <motion.div
-                    className="w-[560px] shrink-0"
+                    className="w-[780px] shrink-0 -mr-16"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
                 >
                     <AsciiObject
-                        src="/duck/scene.gltf"
+                        src="/sunflower/scene.gltf"
                         colored={false}
                         color="#C517F1"
                         highlight="#C517F1"
                         background=""
-                        cellSize={9}
-                        charset="@#*+=−:·. "
+                        cellSize={4}
+                        charset="@%#*+=-:·. "
                         edgeContrast={4}
                         contrast={1.8}
                         autoRotate
                         autoRotateSpeed={1.2}
+                        minAzimuthAngle={-Math.PI * 0.3}
+                        maxAzimuthAngle={Math.PI * 0.3}
                         orbit
                         zoom={false}
                         floatIntensity={1.2}
                         rotationIntensity={0.6}
-                        scale={5.5}
-                        xOffset={-0.3}
-                        cameraDistance={6.2}
+                        scale={9}
+                        xOffset={0}
+                        cameraDistance={8.50}
+                        initialAzimuthAngle={0.0508}
+                        initialPolarAngle={1.34083}
                         className="w-full h-full"
                     />
                 </motion.div>

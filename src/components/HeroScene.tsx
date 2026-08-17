@@ -1,9 +1,10 @@
 import { useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import type { ThreeEvent } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
 import Drone from './models/Drone'
-import RobotDog from './models/RobotDog'
+import Goat from './models/Goat'
 
 const DRONE_RX       = 1.6
 const DRONE_RZ       = 0.55
@@ -113,18 +114,39 @@ function Scene() {
         <Drone />
       </group>
 
-      <group ref={dogRef} scale={1.85}>
-        <RobotDog />
+      <group ref={dogRef} scale={0.45}>
+        <Goat />
       </group>
     </>
   )
+}
+
+function CameraLogger() {
+  const lastKey = useRef('')
+
+  useFrame(({ camera, controls }) => {
+    const p = camera.position
+    const key = `${p.x.toFixed(2)},${p.y.toFixed(2)},${p.z.toFixed(2)}`
+    if (key === lastKey.current) return
+    lastKey.current = key
+
+    let targetStr = ''
+    if (controls && 'target' in controls && controls.target instanceof THREE.Vector3) {
+      const t = controls.target
+      targetStr = `  target: [${t.x.toFixed(2)}, ${t.y.toFixed(2)}, ${t.z.toFixed(2)}]`
+    }
+
+    console.log(`📷 position: [${p.x.toFixed(2)}, ${p.y.toFixed(2)}, ${p.z.toFixed(2)}]${targetStr}`)
+  })
+
+  return null
 }
 
 export default function HeroScene() {
   return (
     <div className="w-full h-full" style={{ cursor: 'crosshair' }}>
       <Canvas
-        camera={{ position: [0, 0.6, 5.4], fov: 52 }}
+        camera={{ position: [0, 2.2, 7.0], fov: 50 }}
         gl={{ alpha: true, antialias: true }}
         dpr={1}
         style={{ width: '100%', height: '100%' }}
@@ -134,6 +156,8 @@ export default function HeroScene() {
         <pointLight position={[-3, 1,  2]} color="#9417DE" intensity={6}  />
         <pointLight position={[0, -3,  1]} color="#ffffff" intensity={0.8} />
 
+        <OrbitControls makeDefault />
+        <CameraLogger />
         <Scene />
       </Canvas>
     </div>

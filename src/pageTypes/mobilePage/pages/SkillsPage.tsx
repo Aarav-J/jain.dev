@@ -15,7 +15,7 @@ const SkillsPage: React.FC<SmSectionType> = ({ headingRef }) => {
                 <span className="font-mono text-[10px] text-devPink tracking-[0.2em] uppercase">Stack</span>
                 <h2 className="font-display font-black text-3xl text-white tracking-tight">Skills</h2>
                 <p className="text-devGrey text-sm font-display font-light mt-1">
-                    Things I know well enough to be dangerous with.
+                    Skills I've acquired through the years
                 </p>
             </div>
 

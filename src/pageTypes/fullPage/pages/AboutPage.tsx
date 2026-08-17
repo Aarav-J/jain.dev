@@ -165,7 +165,7 @@ const AboutPage: React.FC<SectionProps> = ({ headingRef }) => {
                                             </h3>
                                             <FontAwesomeIcon
                                                 icon={faArrowUpRightFromSquare}
-                                                className="text-devPink/35 text-xs mt-[4px] shrink-0"
+                                                className="text-devPink/70 text-xs mt-[4px] shrink-0"
                                             />
                                         </div>
 

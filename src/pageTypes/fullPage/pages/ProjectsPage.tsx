@@ -8,8 +8,6 @@ import SectionProps from "../../../type/sectionType"
 
 interface FeaturedEntry {
     project: ProjectData
-    stat: string
-    statLabel: string
     hook: string
 }
 
@@ -17,20 +15,14 @@ interface FeaturedEntry {
 const featured: FeaturedEntry[] = [
     {
         project: projects[3],
-        stat: "91%",
-        statLabel: "possession prediction precision",
         hook: "3,000+ matches · 10M+ events · 5 leagues · BiLSTM + Gradient Boosting",
     },
     {
         project: projects[0],
-        stat: "1ms",
-        statLabel: "SysTick preemption",
         hook: "Preemptive RTOS kernel · bare-metal STM32F4 · C + ARM Assembly",
     },
     {
-        project: projects[2],
-        stat: "47%",
-        statLabel: "accuracy decline documented",
+        project: projects[4],
         hook: "Published · NAACL 2025 Student Research Workshop",
     },
 ]
@@ -83,15 +75,6 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
                                 {typeLabel[featured[0].project.type]}
                             </span>
 
-                            {/* Stat — the headline of the card */}
-                            <div className="flex items-end gap-3">
-                                <span className="font-display font-black text-[4.5rem] text-white leading-none tracking-tight">
-                                    {featured[0].stat}
-                                </span>
-                                <span className="font-mono text-[10px] text-devGrey/50 pb-2 leading-snug max-w-[110px]">
-                                    {featured[0].statLabel}
-                                </span>
-                            </div>
 
                             <h3 className="font-display font-bold text-2xl text-white tracking-tight">
                                 {featured[0].project.name}
@@ -126,20 +109,11 @@ const ProjectsPage: React.FC<SectionProps> = ({ headingRef }) => {
                                     {typeLabel[entry.project.type]}
                                 </span>
 
-                                {/* Stat in small form */}
-                                <div className="flex items-baseline gap-2">
-                                    <span className="font-display font-black text-2xl text-white leading-none">
-                                        {entry.stat}
-                                    </span>
-                                    <span className="font-mono text-[9px] text-devGrey/40 leading-tight max-w-[80px]">
-                                        {entry.statLabel}
-                                    </span>
-                                </div>
 
                                 <h3 className="font-display font-bold text-base text-white tracking-tight leading-tight">
                                     {entry.project.name}
                                 </h3>
-                                <p className="text-devGrey/45 text-[9px] font-mono leading-relaxed line-clamp-2">
+                                <p className="text-devGrey/60 text-[9px] font-mono leading-relaxed line-clamp-2">
                                     {entry.hook}
                                 </p>
                             </div>

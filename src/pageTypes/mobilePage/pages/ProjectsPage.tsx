@@ -8,7 +8,7 @@ import { projects } from "../../../data/projects"
 import { typeColor, typeLabel } from "../../../data/projectUtils"
 
 // FinalThird (web+ML), AaRTOS (systems), Truth Decay (research) — type diversity
-const featured = [projects[3], projects[0], projects[2]]
+const featured = [projects[3], projects[0], projects[4]]
 
 const ProjectsPage: React.FC<SmSectionType> = ({ headingRef }) => {
     const navigate = useNavigate()

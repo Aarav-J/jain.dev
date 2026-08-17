@@ -77,7 +77,7 @@ const ExperiencePage: React.FC<SectionProps> = ({ headingRef }) => {
                                         </h3>
                                         <FontAwesomeIcon
                                             icon={faArrowUpRightFromSquare}
-                                            className="text-devPink/40 text-sm mt-[4px] shrink-0 hover:text-devPink transition-colors hovered"
+                                            className="text-devPink/70 text-sm mt-[4px] shrink-0 hover:text-devPink transition-colors hovered"
                                         />
                                     </div>
 

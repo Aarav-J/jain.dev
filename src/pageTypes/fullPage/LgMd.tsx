@@ -27,9 +27,9 @@ function LgMd() {
   const headingRefAbout = useRef<HTMLHeadingElement>(null)
 
   const s1 = useOnScreen(headingRefLanding)
-  const s2 = useOnScreen(headingRefProject)
-  const s3 = useOnScreen(headingRefSkills)
-  const s4 = useOnScreen(headingRefAbout)
+  const s2 = useOnScreen(headingRefAbout)
+  const s3 = useOnScreen(headingRefProject)
+  const s4 = useOnScreen(headingRefSkills)
 
   const [activeNumber, setActiveNumber] = useState<number>(0)
 
@@ -52,6 +52,10 @@ function LgMd() {
           <LandingPage scroll={scrollTo} learnMoreRef={sectionProject} headingRef={headingRefLanding} />
         </div>
 
+        <div className='aboutPage' ref={sectionAbout}>
+          <AboutPage headingRef={headingRefAbout} />
+        </div>
+
         <div className='projectPage' ref={sectionProject}>
           <ProjectsPage headingRef={headingRefProject} />
         </div>
@@ -59,14 +63,11 @@ function LgMd() {
         <div className='skillPage' ref={sectionSkills}>
           <SkillsPage headingRef={headingRefSkills} />
         </div>
-
-        <div className='aboutPage' ref={sectionAbout}>
-          <AboutPage headingRef={headingRefAbout} />
-        </div>
       </div>
 
       <Pagination
-        refList={[sectionLanding, sectionProject, sectionSkills, sectionAbout]}
+        refList={[sectionLanding, sectionAbout, sectionProject, sectionSkills]}
+        labels={["Home", "About", "Projects", "Skills"]}
         activeNumber={activeNumber}
         setActiveNumber={setActiveNumber}
       />

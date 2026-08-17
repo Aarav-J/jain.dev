@@ -38,4 +38,8 @@ export const techLabel: Record<string, string> = {
     pytorch:    "PyTorch",
     axios:      "Axios",
     tensorflow: "TensorFlow",
+    zephyr:     "Zephyr RTOS",
+    pytest:     "PyTest",
+    soldering:  "Soldering",
+    pcb:        "PCB Design",
 }

@@ -52,17 +52,19 @@ const ProjectCard: React.FC<CardProps> = ({ project: p, index: i, onExpand }) =>
                 className="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:opacity-62 transition-opacity duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background-primary/90" />
-            <span className={`absolute top-3 left-3 text-[10px] font-mono px-2 py-0.5 rounded border flex items-center gap-1.5 ${typeColor[p.type]}`}>
-                {typeIcon[p.type]}
-                {typeLabel[p.type]}
-            </span>
         </div>
 
         {/* Content */}
         <div className="flex flex-col flex-1 p-5 gap-3">
-            <h3 className="font-display font-bold text-xl text-white tracking-tight leading-tight">
-                {p.name}
-            </h3>
+            <div className="flex items-center gap-2.5">
+                <h3 className="font-display font-bold text-xl text-white tracking-tight leading-tight">
+                    {p.name}
+                </h3>
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded border flex items-center gap-1.5 shrink-0 ${typeColor[p.type]}`}>
+                    {typeIcon[p.type]}
+                    {typeLabel[p.type]}
+                </span>
+            </div>
             <p className="text-devGrey text-sm font-display leading-relaxed line-clamp-2 flex-1">
                 {p.description}
             </p>
@@ -262,7 +264,7 @@ const ExpandedOverlay: React.FC<ExpandedProps> = ({ project: p, origin, onClose 
                                 className="flex items-center gap-2 px-4 py-2 bg-devPink text-white rounded-lg text-sm font-mono hover:bg-devPurple transition-colors hovered"
                             >
                                 <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-                                Live Demo
+                                {p.type === 'research' ? 'Research Paper' : 'Live Demo'}
                             </a>
                         )}
                     </div>
@@ -363,40 +365,38 @@ const SpecificProjects = () => {
 
             <div className="pt-24 pb-16 px-20 flex flex-col gap-8 max-w-7xl w-full mx-auto">
 
-                {/* Header */}
-                <div className="flex flex-row justify-between items-end">
+                {/* Header + filters on one row */}
+                <div className="flex flex-row items-end justify-between">
                     <div className="flex flex-col gap-1">
                         <span className="font-mono text-xs text-devPink tracking-[0.2em] uppercase">All Work</span>
                         <h1 className="font-display font-black text-5xl text-white tracking-tight">Projects</h1>
                     </div>
-                    <span className="font-mono text-xs text-devGrey/40 tracking-widest">
-                        {filtered.length} project{filtered.length !== 1 ? 's' : ''}
-                    </span>
-                </div>
-
-                {/* Filter bar */}
-                <div className="flex flex-row gap-2">
-                    {FILTERS.map(({ type, label }) => (
-                        <motion.button
-                            key={type}
-                            onClick={() => setActiveFilter(type)}
-                            className={`px-4 py-1.5 rounded-md font-mono text-xs tracking-[0.08em] transition-colors ${
-                                activeFilter === type
-                                    ? 'bg-devPink text-white'
-                                    : 'bg-transparent text-devGrey border border-white/10 hover:border-white/30'
-                            }`}
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                        >
-                            {label}
-                            {type !== 'all' && (
-                                <span className="ml-1.5 opacity-50">
-                                    {projects.filter(p => p.type === type).length}
-                                </span>
-                            )}
-                        </motion.button>
-                    ))}
+                    <div className="flex flex-row items-center gap-3 pb-1">
+                        {FILTERS.map(({ type, label }) => (
+                            <motion.button
+                                key={type}
+                                onClick={() => setActiveFilter(type)}
+                                className={`px-4 py-1.5 rounded-md font-mono text-xs tracking-[0.08em] transition-colors ${
+                                    activeFilter === type
+                                        ? 'bg-devPink text-white'
+                                        : 'bg-transparent text-devGrey border border-white/10 hover:border-white/30'
+                                }`}
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                            >
+                                {label}
+                                {type !== 'all' && (
+                                    <span className="ml-1.5 opacity-50">
+                                        {projects.filter(p => p.type === type).length}
+                                    </span>
+                                )}
+                            </motion.button>
+                        ))}
+                        <span className="font-mono text-xs text-devGrey/40 tracking-widest ml-2">
+                            {filtered.length} project{filtered.length !== 1 ? 's' : ''}
+                        </span>
+                    </div>
                 </div>
 
                 {/* Grid */}

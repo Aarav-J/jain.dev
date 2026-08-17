@@ -20,6 +20,15 @@ export const projects: ProjectData[] = [
     type: "systems"
   },
   {
+    name: "SlayterHiL",
+    description: "A hardware-in-the-loop (HIL) flight controller. Runs drone flight controller firmware on using an ESP32-S3 while a physics simulation generates realistic sensor streams. I worked on the multi-threaded architecture that manages flight control, hover, and landing threads. I wrote device drivers for a BNO055 IMU and a Garmin Lite V4 LiDAR over I²C;",
+    github: null,
+    website: "www.esap.dev/projects/slayterhil/",
+    images: ["slayterhil_hw.jpg", "slayterhil_arch.png", "slayterhil_rc.png"],
+    technologies: ["c", "cplusplus", "zephyr", "soldering", "pcb"],
+    type: "systems"
+  },
+  {
     name: "Datasheet Parser",
     description: "An electrical component datasheet intelligence platform. Engineers ask natural-language questions over datasheets via citation-backed RAG. A custom parsing pipeline using Modal, Docling, and S3 converts complex datasheets into structured data — pin tables, register maps, electrical specs, and communication protocols.",
     github: "github.com/Aarav-J/datasheet_parse",
@@ -27,15 +36,6 @@ export const projects: ProjectData[] = [
     images: ["datasheet.png"],
     technologies: ["python", "typescript", "nextjs", "openai", "pinecone"],
     type: "web"
-  },
-  {
-    name: "Truth Decay",
-    description: "A benchmark for evaluating sycophancy in extended LLM dialogues. Identified a 47% accuracy decline over multi-turn interactions. Co-authored the research paper documenting methodology, experimental pipeline, and findings. Published at the NAACL 2025 Student Research Workshop.",
-    github: null,
-    website: "arxiv.org/pdf/2503.11656",
-    images: ["research.png"],
-    technologies: ["python", "overleaf"],
-    type: "research"
   },
   {
     name: "Final Third",
@@ -46,6 +46,15 @@ export const projects: ProjectData[] = [
     video: "finalthird_web.mp4",
     technologies: ["python", "typescript", "react", "fastapi", "pytorch"],
     type: "web"
+  },
+  {
+    name: "Truth Decay",
+    description: "A benchmark for evaluating sycophancy in extended LLM dialogues. Identified a 47% accuracy decline over multi-turn interactions. Co-authored the research paper documenting methodology, experimental pipeline, and findings. Published at the NAACL 2025 Student Research Workshop.",
+    github: null,
+    website: "arxiv.org/pdf/2503.11656",
+    images: ["research.png"],
+    technologies: ["python", "overleaf"],
+    type: "research"
   },
   {
     name: "Bridge",
@@ -93,3 +102,4 @@ export const projects: ProjectData[] = [
     type: "web"
   },
 ]
+

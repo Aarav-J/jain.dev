@@ -33,6 +33,10 @@ export interface AsciiObjectOptions {
   zoom?: boolean;
   autoRotate?: boolean;
   autoRotateSpeed?: number;
+  minAzimuthAngle?: number;
+  maxAzimuthAngle?: number;
+  initialAzimuthAngle?: number;
+  initialPolarAngle?: number;
   fov?: number;
   cameraDistance?: number;
   dracoDecoderPath?: string;
@@ -80,6 +84,10 @@ const DEFAULTS: Required<AsciiObjectOptions> = {
   zoom: false,
   autoRotate: false,
   autoRotateSpeed: 2,
+  minAzimuthAngle: -Infinity,
+  maxAzimuthAngle: Infinity,
+  initialAzimuthAngle: 0,
+  initialPolarAngle: Math.acos(-1 / Math.sqrt(17)), // matches CAMERA_DIR = (0,-1,4).normalize()
   fov: 65,
   cameraDistance: 4.2,
   dracoDecoderPath: "https://www.gstatic.com/draco/versioned/decoders/1.5.7/",
@@ -651,7 +659,12 @@ export function createAsciiObject(
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(config.fov, 1, 0.1, 200);
-  camera.position.copy(CAMERA_DIR).multiplyScalar(config.cameraDistance);
+  {
+    const _s = new THREE.Spherical().setFromVector3(CAMERA_DIR);
+    _s.theta = config.initialAzimuthAngle;
+    _s.phi   = config.initialPolarAngle;
+    camera.position.setFromSpherical(_s).multiplyScalar(config.cameraDistance);
+  }
 
   const floatGroup = new THREE.Group();
   floatGroup.position.y = MODEL_LIFT;
@@ -662,6 +675,17 @@ export function createAsciiObject(
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.enablePan = false;
+
+  if (import.meta.env.DEV) {
+    controls.addEventListener('change', () => {
+      const s = new THREE.Spherical().setFromVector3(camera.position);
+      console.log(
+        `📷 cameraDistance={${s.radius.toFixed(2)}}` +
+        ` initialAzimuthAngle={${s.theta.toFixed(4)}}` +
+        ` initialPolarAngle={${s.phi.toFixed(4)}}`
+      );
+    });
+  }
 
   const target = new THREE.WebGLRenderTarget(1, 1, { samples: 4 });
   target.texture.colorSpace = THREE.SRGBColorSpace;
@@ -934,8 +958,11 @@ export function createAsciiObject(
     scene.environmentIntensity = config.environmentIntensity;
     controls.enableRotate = config.orbit;
     controls.enableZoom = config.zoom;
-    controls.autoRotate = config.autoRotate && !reducedMotion;
+    const hasBounds = isFinite(config.minAzimuthAngle) || isFinite(config.maxAzimuthAngle);
+    controls.autoRotate = config.autoRotate && !reducedMotion && !hasBounds;
     controls.autoRotateSpeed = config.autoRotateSpeed;
+    controls.minAzimuthAngle = config.minAzimuthAngle;
+    controls.maxAzimuthAngle = config.maxAzimuthAngle;
     camera.fov = config.fov;
     camera.updateProjectionMatrix();
     floatGroup.position.x = config.xOffset;
@@ -978,6 +1005,8 @@ export function createAsciiObject(
 
   let inView = true, loopRunning = false;
   let lastTime = 0, elapsed = Math.random() * 100;
+  let bounceDir = 1;
+  const _bounceSph = new THREE.Spherical();
 
   function tick(time: number) {
     if (!inView) { lastTime = 0; stopLoop(); return; }
@@ -985,6 +1014,15 @@ export function createAsciiObject(
     lastTime = time;
     if (envDirty) { envDirty = false; refreshEnvironment(); }
     controls.update();
+    // Bouncing autoRotate — fires only when azimuth bounds are set
+    if (config.autoRotate && !reducedMotion && (isFinite(config.minAzimuthAngle) || isFinite(config.maxAzimuthAngle))) {
+      _bounceSph.setFromVector3(camera.position.clone().sub(controls.target));
+      _bounceSph.theta += (2 * Math.PI / 60) * config.autoRotateSpeed * bounceDir * delta;
+      if (_bounceSph.theta >= config.maxAzimuthAngle) { bounceDir = -1; _bounceSph.theta = config.maxAzimuthAngle; }
+      if (_bounceSph.theta <= config.minAzimuthAngle) { bounceDir =  1; _bounceSph.theta = config.minAzimuthAngle; }
+      camera.position.setFromSpherical(_bounceSph).add(controls.target);
+      camera.lookAt(controls.target);
+    }
     if (!reducedMotion) {
       elapsed += delta * config.floatSpeed;
       floatGroup.rotation.x = (Math.cos(elapsed / 4) / 8) * config.rotationIntensity;

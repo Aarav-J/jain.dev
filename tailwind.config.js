@@ -1,6 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{js,jsx,tsx}", "./*.html"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}", "./*.html"],
+  safelist: [
+    "text-blue-300",   "bg-blue-500/10",   "border-blue-500/20",
+    "text-green-300",  "bg-green-500/10",  "border-green-500/20",
+    "text-purple-300", "bg-purple-500/10", "border-purple-500/20",
+    "text-orange-300", "bg-orange-500/10", "border-orange-500/20",
+  ],
   mode: "jit",
   theme: {
     extend: {

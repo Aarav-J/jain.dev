@@ -57,7 +57,7 @@ const SkilsPage: React.FC<SectionProps> = ({ headingRef }) => {
                         Skills
                     </h2>
                     <p className="text-devGrey text-sm font-display font-light leading-relaxed mt-1">
-                        Things I know well enough to be dangerous with.
+                        Skills I've acquired through the years.
                     </p>
                     <span className="font-mono text-[10px] text-devGrey/30 tracking-widest mt-2">
                         {total} technologies
