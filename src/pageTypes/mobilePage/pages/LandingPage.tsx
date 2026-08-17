@@ -37,14 +37,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ headingRef, projectRef }) => 
                     ))}
                 </motion.h1>
 
-                <motion.p
+                {/* <motion.p
                     className="text-devGrey text-base font-display font-light leading-relaxed max-w-xs"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.35 }}
                 >
                     {hero.pitch}
-                </motion.p>
+                </motion.p> */}
 
                 <motion.div
                     className="flex flex-col gap-3 mt-1"

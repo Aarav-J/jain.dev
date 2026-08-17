@@ -50,15 +50,15 @@ const AboutPage: React.FC<SmSectionType> = ({ headingRef }) => {
                 {/* Links */}
                 <div className="flex flex-row gap-5">
                     <a href={person.github} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-devGrey/55 text-xs font-mono">
+                        className="flex items-center gap-1.5 text-devGrey/50 text-xs font-mono">
                         <FontAwesomeIcon icon={faGithub} className="text-sm" /> GitHub
                     </a>
                     <a href={person.linkedin} target="_blank" rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-devGrey/55 text-xs font-mono">
+                        className="flex items-center gap-1.5 text-devGrey/50 text-xs font-mono">
                         <FontAwesomeIcon icon={faLinkedin} className="text-sm" /> LinkedIn
                     </a>
                     <a href={`mailto:${person.email}`}
-                        className="flex items-center gap-1.5 text-devGrey/55 text-xs font-mono">
+                        className="flex items-center gap-1.5 text-devGrey/50 text-xs font-mono">
                         <FontAwesomeIcon icon={faEnvelope} className="text-sm" /> Email
                     </a>
                 </div>
