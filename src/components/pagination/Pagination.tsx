@@ -1,25 +1,56 @@
+import { useEffect } from "react"
 import PaginationItem from "./PaginationItem"
 
-type PaginationProps = { 
+type PaginationProps = {
     refList: React.RefObject<HTMLDivElement>[]
+    labels: string[]
     activeNumber: number
     setActiveNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Pagination: React.FC<PaginationProps> = ({ refList, activeNumber, setActiveNumber }) => { 
-    
-    const scrollTo = (section: React.RefObject<HTMLDivElement>) => { 
+const Pagination: React.FC<PaginationProps> = ({ refList, labels, activeNumber, setActiveNumber }) => {
+    const scrollTo = (section: React.RefObject<HTMLDivElement>) => {
         section.current?.scrollIntoView({ behavior: 'smooth' })
     }
 
-    return ( 
-        <div className="pagination h-screen flex justify-center items-center absolute flex-col top-[0px] left-12 gap-3">
-            <PaginationItem pageNumber="01" refNumber={refList[0]} scroll={scrollTo} activeNumber={activeNumber} setActiveNumber={setActiveNumber}/>
-            <PaginationItem pageNumber="02" refNumber={refList[1]} scroll={scrollTo} activeNumber={activeNumber} setActiveNumber={setActiveNumber}/>
-            <PaginationItem pageNumber="03" refNumber={refList[2]} scroll={scrollTo} activeNumber={activeNumber} setActiveNumber={setActiveNumber}/>
-            <PaginationItem pageNumber="04" refNumber={refList[3]} scroll={scrollTo} activeNumber={activeNumber} setActiveNumber={setActiveNumber}/>
-           
+    useEffect(() => {
+        const handleKey = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault()
+                const next = Math.min(activeNumber + 1, refList.length)
+                if (next !== activeNumber) {
+                    setActiveNumber(next)
+                    scrollTo(refList[next - 1])
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault()
+                const prev = Math.max(activeNumber - 1, 1)
+                if (prev !== activeNumber) {
+                    setActiveNumber(prev)
+                    scrollTo(refList[prev - 1])
+                }
+            }
+        }
+        window.addEventListener('keydown', handleKey)
+        return () => window.removeEventListener('keydown', handleKey)
+    }, [activeNumber, refList, setActiveNumber])
+
+    return (
+        <div className="h-screen flex justify-center items-center absolute flex-col top-0 left-4 gap-2 z-20 pointer-events-none">
+            {refList.map((ref, i) => (
+                <div key={i} className="pointer-events-auto">
+                    <PaginationItem
+                        pageNumber={String(i + 1).padStart(2, '0')}
+                        refNumber={ref}
+                        scroll={scrollTo}
+                        activeNumber={activeNumber}
+                        setActiveNumber={setActiveNumber}
+                        label={labels[i]}
+                    />
+                </div>
+            ))}
         </div>
     )
 }
+
 export default Pagination

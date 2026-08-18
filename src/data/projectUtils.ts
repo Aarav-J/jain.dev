@@ -1,0 +1,45 @@
+export const typeColor: Record<string, string> = {
+    web:      "text-blue-300 bg-blue-500/10 border-blue-500/20",
+    mobile:   "text-green-300 bg-green-500/10 border-green-500/20",
+    research: "text-purple-300 bg-purple-500/10 border-purple-500/20",
+    systems:  "text-orange-300 bg-orange-500/10 border-orange-500/20",
+}
+
+export const typeLabel: Record<string, string> = {
+    web:      "Web",
+    mobile:   "Mobile",
+    research: "Research",
+    systems:  "Systems",
+}
+
+export const techLabel: Record<string, string> = {
+    react:      "React",
+    typescript: "TypeScript",
+    python:     "Python",
+    js:         "JavaScript",
+    node:       "Node.js",
+    tailwind:   "Tailwind",
+    openai:     "OpenAI",
+    socket:     "Socket.IO",
+    supabase:   "Supabase",
+    expo:       "Expo",
+    overleaf:   "LaTeX",
+    mongo:      "MongoDB",
+    firebase:   "Firebase",
+    flask:      "Flask",
+    cplusplus:  "C++",
+    ts:         "TypeScript",
+    c:          "C",
+    arm:        "ARM",
+    stm32:      "STM32",
+    nextjs:     "Next.js",
+    pinecone:   "Pinecone",
+    fastapi:    "FastAPI",
+    pytorch:    "PyTorch",
+    axios:      "Axios",
+    tensorflow: "TensorFlow",
+    zephyr:     "Zephyr RTOS",
+    pytest:     "PyTest",
+    soldering:  "Soldering",
+    pcb:        "PCB Design",
+}

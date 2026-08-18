@@ -1,0 +1,11 @@
+Model Information:
+* title:	Plants vs. Zombies 3 (Pre-Alpha) - Sunflower
+* source:	https://sketchfab.com/3d-models/plants-vs-zombies-3-pre-alpha-sunflower-db157ae94f3d44eaa5b3af267174e0a0
+* author:	eduardosouzabarbosadasilva (https://sketchfab.com/eduardosouzabarbosadasilva)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Plants vs. Zombies 3 (Pre-Alpha) - Sunflower" (https://sketchfab.com/3d-models/plants-vs-zombies-3-pre-alpha-sunflower-db157ae94f3d44eaa5b3af267174e0a0) by eduardosouzabarbosadasilva (https://sketchfab.com/eduardosouzabarbosadasilva) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

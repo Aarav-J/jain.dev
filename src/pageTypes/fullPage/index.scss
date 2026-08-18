@@ -1,71 +1,88 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
-// @tailwind components;
 @tailwind utilities;
-* { 
-    font-family: "Source Sans 3", sans-serif;
+
+* {
+  font-family: "Geist", sans-serif;
 }
-:root { 
-  --primary-color: #C517F1;
-  --secondary-color: #9417DE;
-}
-@media (min-width: 1024px){
-  
-  .container { 
-      position: relative; 
-      overflow-y: auto;
-      overscroll-behavior-y: contain;
-      scroll-snap-type: y mandatory;
-      height: 100vh; 
-      width: 100vw;
+
+@media (min-width: 1024px) {
+  .container {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    scroll-snap-type: y mandatory;
+    height: 100vh;
+    width: 100vw;
     -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-          display: none;
-          width: 0px;
-
-      }
-
-        scroll-behavior: smooth;
-
-
-      &::-webkit-scrollbar-thumb {
-    background-color: #888; /* Customize the scrollbar thumb color */
-  }
-    
-    
-
-    
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #888;
+    }
   }
 
-  .body { 
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-      &::-webkit-scrollbar {
-          display: none;
-
-      }
-        position: relative; 
-      overflow-y: auto;
-
-      height: 100vh; 
-      width: 100vw;
+  .body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    width: 100vw;
   }
 }
 
+.projects-list {
+  overscroll-behavior: contain;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+  }
+}
 
-html *, 
-body * { 
+// Themed scrollbar — matches the dark / devPink palette
+.themed-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(197, 23, 241, 0.35) transparent; // thumb · track (Firefox)
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(238, 218, 234, 0.16); // white/16
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color 0.2s ease;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(197, 23, 241, 0.55); // devPink
+  }
+}
+
+html *,
+body * {
   cursor: none;
 }
 
 body {
-  background: #1E1E1E;
-  overflow-x: auto;
-  
+  background: #0F1820;
+  overflow-x: hidden;
 }
 
-
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
