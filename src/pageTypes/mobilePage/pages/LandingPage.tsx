@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { person, hero } from "../../../data/content"
+import AsciiObject from "../../../components/AsciiObject"
 
 type LandingPageProps = {
     headingRef: React.RefObject<HTMLDivElement>
@@ -14,8 +15,38 @@ const LandingPage: React.FC<LandingPageProps> = ({ headingRef, projectRef }) => 
     }
 
     return (
-        <div className="w-screen min-h-[100dvh] bg-background-primary flex items-center px-6 pt-20" ref={headingRef}>
-            <div className="flex flex-col gap-6 w-full">
+        <div className="relative w-screen min-h-[100dvh] bg-background-primary flex flex-col justify-end overflow-hidden px-6 pt-24 pb-16" ref={headingRef}>
+
+            {/* Decorative ASCII sunflower — auto-rotates, non-interactive so it never blocks page scroll */}
+            <div className="pointer-events-none absolute inset-x-0 top-12 flex justify-center">
+                <div className="w-[118%] max-w-[540px] aspect-square opacity-95">
+                    <AsciiObject
+                        src="/sunflower/scene.gltf"
+                        colored={false}
+                        color="#C517F1"
+                        highlight="#C517F1"
+                        background=""
+                        cellSize={4}
+                        charset="@%#*+=-:·. "
+                        edgeContrast={4}
+                        contrast={1.8}
+                        autoRotate
+                        autoRotateSpeed={1.0}
+                        orbit={false}
+                        minAzimuthAngle={-Math.PI * 0.3}
+                        maxAzimuthAngle={Math.PI * 0.3}
+                        zoom={false}
+                        floatIntensity={1.2}
+                        rotationIntensity={0.6}
+                        scale={8}
+                        cameraDistance={10}
+                        initialPolarAngle={1.34083}
+                        className="w-full h-full"
+                    />
+                </div>
+            </div>
+
+            <div className="relative z-10 flex flex-col gap-6 w-full">
 
                 <motion.span
                     className="font-mono text-[10px] text-devGrey tracking-[0.22em] uppercase"

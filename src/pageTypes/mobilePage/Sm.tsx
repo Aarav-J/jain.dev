@@ -3,7 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import SkillsPage from "./pages/SkillsPage";
 import { useMemo, useRef } from "react";
-import BottomNav from "../../components/BottomNav";
+import MobileNav from "../../components/MobileNav";
 import useActiveSection, { type Section } from "../../hooks/useActiveSection";
 
 const MobilePage = () => {
@@ -31,15 +31,11 @@ const MobilePage = () => {
 
     return (
         <div className="w-full h-full flex flex-col">
+            <MobileNav activeSection={activeSection} onNavigate={navigate} />
             <LandingPage headingRef={LandingSection} projectRef={ProjectSection} />
             <ProjectsPage headingRef={ProjectSection} />
             <SkillsPage headingRef={SkillSection} />
             <AboutPage headingRef={AboutSection} />
-
-            {/* keeps the last section clear of the fixed bar */}
-            <div aria-hidden className="h-24 bg-background-primary" />
-
-            <BottomNav activeSection={activeSection} onNavigate={navigate} />
         </div>
     );
 };
